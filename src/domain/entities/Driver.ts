@@ -14,6 +14,6 @@ export class Driver {
 		public vehiclePlate: string,
 		public createdAt: Date,
 		public updatedAt: Date,
-		public ride: Ride[]
+		public rides: Ride[]
 	) {}
 }

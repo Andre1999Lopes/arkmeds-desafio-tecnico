@@ -1,7 +1,8 @@
+import { CreateDriverDTO } from '../../application/dtos/CreateDriverDto';
 import { Driver } from '../entities/Driver';
 
 export interface DriverRepository {
-	create(driver: Driver): Promise<Driver>;
+	create(driver: CreateDriverDTO): Promise<Driver>;
 	findById(driverId: string): Promise<Driver>;
 	findByCpf(driverCpf: string): Promise<Driver>;
 	findAll(): Promise<Driver[]>;
