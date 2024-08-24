@@ -18,7 +18,7 @@ model Passenger {
   email       String   @unique
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-  Ride        Ride[]
+  rides       Ride[]
 }
 
 model Driver {
@@ -34,13 +34,13 @@ model Driver {
   vehiclePlate  String   @unique
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
-  Ride          Ride[]
+  rides         Ride[]
 }
 
 model Ride {
   id          String   @id @default(uuid()) @db.Uuid
-  passengerId String
-  driverId    String
+  passengerId String   @db.Uuid
+  driverId    String   @db.Uuid
   fare        Float
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
