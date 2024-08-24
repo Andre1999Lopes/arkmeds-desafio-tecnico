@@ -10,17 +10,7 @@ export class DriverRepositoryImpl implements DriverRepository {
 
 	async create(dto: CreateDriverDTO): Promise<Driver> {
 		const newDriver = await this.prisma.driver.create({
-			data: {
-				name: dto.name,
-				cpf: dto.cpf,
-				age: dto.age,
-				sex: dto.sex,
-				address: dto.address,
-				phoneNumber: dto.phoneNumber,
-				email: dto.email,
-				licenseNumber: dto.licenseNumber,
-				vehiclePlate: dto.vehiclePlate
-			},
+			data: dto,
 			include: {
 				rides: true
 			}
@@ -37,6 +27,7 @@ export class DriverRepositoryImpl implements DriverRepository {
 			newDriver.email,
 			newDriver.licenseNumber,
 			newDriver.vehiclePlate,
+			newDriver.birthDate,
 			newDriver.createdAt,
 			newDriver.updatedAt,
 			newDriver.rides
@@ -64,6 +55,7 @@ export class DriverRepositoryImpl implements DriverRepository {
 			driver.email,
 			driver.licenseNumber,
 			driver.vehiclePlate,
+			driver.birthDate,
 			driver.createdAt,
 			driver.updatedAt,
 			driver.rides
@@ -91,6 +83,7 @@ export class DriverRepositoryImpl implements DriverRepository {
 			driver.email,
 			driver.licenseNumber,
 			driver.vehiclePlate,
+			driver.birthDate,
 			driver.createdAt,
 			driver.updatedAt,
 			driver.rides
@@ -115,6 +108,7 @@ export class DriverRepositoryImpl implements DriverRepository {
 					driver.email,
 					driver.licenseNumber,
 					driver.vehiclePlate,
+					driver.birthDate,
 					driver.createdAt,
 					driver.updatedAt,
 					driver.rides
@@ -152,6 +146,7 @@ export class DriverRepositoryImpl implements DriverRepository {
 			updatedDriver.email,
 			updatedDriver.licenseNumber,
 			updatedDriver.vehiclePlate,
+			updatedDriver.birthDate,
 			updatedDriver.createdAt,
 			updatedDriver.updatedAt,
 			updatedDriver.rides

@@ -6,6 +6,7 @@ export interface CreateDriverDTO {
 	address: string;
 	phoneNumber: string;
 	email: string;
+	birthDate: Date;
 	licenseNumber: string;
 	vehiclePlate: string;
 }

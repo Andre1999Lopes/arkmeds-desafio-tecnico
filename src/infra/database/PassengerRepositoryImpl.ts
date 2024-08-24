@@ -10,15 +10,7 @@ export class PassengerRepositoryImpl implements PassengerRepository {
 
 	async create(dto: CreatePassengerDTO): Promise<Passenger> {
 		const newPassenger = await this.prisma.passenger.create({
-			data: {
-				name: dto.name,
-				cpf: dto.cpf,
-				age: dto.age,
-				sex: dto.sex,
-				address: dto.address,
-				phoneNumber: dto.phoneNumber,
-				email: dto.email
-			},
+			data: dto,
 			include: {
 				rides: true
 			}
@@ -33,6 +25,7 @@ export class PassengerRepositoryImpl implements PassengerRepository {
 			newPassenger.address,
 			newPassenger.phoneNumber,
 			newPassenger.email,
+			newPassenger.birthDate,
 			newPassenger.createdAt,
 			newPassenger.updatedAt,
 			newPassenger.rides
@@ -58,6 +51,7 @@ export class PassengerRepositoryImpl implements PassengerRepository {
 			passenger.address,
 			passenger.phoneNumber,
 			passenger.email,
+			passenger.birthDate,
 			passenger.createdAt,
 			passenger.updatedAt,
 			passenger.rides
@@ -83,6 +77,7 @@ export class PassengerRepositoryImpl implements PassengerRepository {
 			passenger.address,
 			passenger.phoneNumber,
 			passenger.email,
+			passenger.birthDate,
 			passenger.createdAt,
 			passenger.updatedAt,
 			passenger.rides
@@ -105,6 +100,7 @@ export class PassengerRepositoryImpl implements PassengerRepository {
 					passenger.address,
 					passenger.phoneNumber,
 					passenger.email,
+					passenger.birthDate,
 					passenger.createdAt,
 					passenger.updatedAt,
 					passenger.rides
@@ -138,6 +134,7 @@ export class PassengerRepositoryImpl implements PassengerRepository {
 			updatedPassenger.address,
 			updatedPassenger.phoneNumber,
 			updatedPassenger.email,
+			updatedPassenger.birthDate,
 			updatedPassenger.createdAt,
 			updatedPassenger.updatedAt,
 			updatedPassenger.rides

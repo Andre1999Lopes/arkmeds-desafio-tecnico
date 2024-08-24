@@ -12,6 +12,7 @@ export class Driver {
 		public email: string,
 		public licenseNumber: string,
 		public vehiclePlate: string,
+		public birthDate: Date,
 		public createdAt: Date,
 		public updatedAt: Date,
 		public rides: Ride[]

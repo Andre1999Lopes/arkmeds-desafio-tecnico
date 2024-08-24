@@ -10,6 +10,7 @@ export class Passenger {
 		public address: string,
 		public phoneNumber: string,
 		public email: string,
+		public birthDate: Date,
 		public createdAt: Date,
 		public updatedAt: Date,
 		public ride: Ride[]
