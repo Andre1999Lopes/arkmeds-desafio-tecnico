@@ -1,5 +1,3 @@
-// src/infra/db/PassengerRepositoryImpl.ts
-
 import { PrismaClient } from '@prisma/client';
 import { CreatePassengerDTO } from '../../application/dtos/CreatePassengerDto';
 import { Passenger } from '../../domain/entities/Passenger';

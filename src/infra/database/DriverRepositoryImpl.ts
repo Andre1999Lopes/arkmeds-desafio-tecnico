@@ -1,5 +1,3 @@
-// src/infra/db/DriverRepositoryImpl.ts
-
 import { PrismaClient } from '@prisma/client';
 import { CreateDriverDTO } from '../../application/dtos/CreateDriverDto';
 import { Driver } from '../../domain/entities/Driver';
