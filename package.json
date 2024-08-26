@@ -2,9 +2,9 @@
   "name": "arkmeds-desafio-tecnico",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/main/server.js",
   "scripts": {
-    "start": "node dist/main/server.js",
+    "start": "prisma migrate deploy && node dist/main/server.js",
     "build": "tsc"
   },
   "prisma": {
