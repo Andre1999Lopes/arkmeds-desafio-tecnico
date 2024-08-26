@@ -4,7 +4,7 @@
   "description": "",
   "main": "dist/main/server.js",
   "scripts": {
-    "start": "prisma migrate deploy && node dist/main/server.js",
+    "start": "prisma --schema=$PRISMA_SCHEMA migrate deploy && node dist/main/server.js",
     "build": "tsc"
   },
   "prisma": {
