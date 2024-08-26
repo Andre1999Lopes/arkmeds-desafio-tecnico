@@ -16,7 +16,13 @@ export class PassengerController {
 		private findPassengerById: FindPassengerById,
 		private updatePassenger: UpdatePassenger,
 		private deletePassenger: DeletePassenger
-	) {}
+	) {
+		this.create = this.create.bind(this);
+		this.findAll = this.findAll.bind(this);
+		this.findById = this.findById.bind(this);
+		this.update = this.update.bind(this);
+		this.delete = this.delete.bind(this);
+	}
 
 	static getInstance(
 		createPassenger: CreatePassenger,
