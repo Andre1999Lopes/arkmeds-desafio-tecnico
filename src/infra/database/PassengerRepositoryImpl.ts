@@ -1,13 +1,23 @@
-import { PrismaClient } from '@prisma/client';
 import { CreatePassengerDTO } from '../../application/dtos/CreatePassengerDto';
 import { Passenger } from '../../domain/entities/Passenger';
 import { PassengerRepository } from '../../domain/repositories/PassengerRepository';
+import { prisma } from '../../main/prisma/client';
 
 export class PassengerRepositoryImpl implements PassengerRepository {
-	private prisma = new PrismaClient();
+	private static instance: PassengerRepositoryImpl;
+
+	private constructor() {}
+
+	static getInstance() {
+		if (!this.instance) {
+			this.instance = new PassengerRepositoryImpl();
+		}
+
+		return this.instance;
+	}
 
 	async create(dto: CreatePassengerDTO): Promise<Passenger> {
-		const newPassenger = await this.prisma.passenger.create({
+		const newPassenger = await prisma.passenger.create({
 			data: dto,
 			include: {
 				rides: true
@@ -30,14 +40,14 @@ export class PassengerRepositoryImpl implements PassengerRepository {
 		);
 	}
 
-	async findById(passengerId: string): Promise<Passenger> {
-		const passenger = await this.prisma.passenger.findUnique({
+	async findById(passengerId: string): Promise<Passenger | null> {
+		const passenger = await prisma.passenger.findUnique({
 			where: { id: passengerId },
 			include: { rides: true }
 		});
 
 		if (!passenger) {
-			throw new Error('Passenger not found');
+			return null;
 		}
 
 		return new Passenger(
@@ -56,14 +66,40 @@ export class PassengerRepositoryImpl implements PassengerRepository {
 		);
 	}
 
-	async findByCpf(passengerCpf: string): Promise<Passenger> {
-		const passenger = await this.prisma.passenger.findUnique({
+	async findByCpf(passengerCpf: string): Promise<Passenger | null> {
+		const passenger = await prisma.passenger.findUnique({
 			where: { cpf: passengerCpf },
 			include: { rides: true }
 		});
 
 		if (!passenger) {
-			throw new Error('Passenger not found');
+			return null;
+		}
+
+		return new Passenger(
+			passenger.id,
+			passenger.name,
+			passenger.cpf,
+			passenger.age,
+			passenger.sex,
+			passenger.address,
+			passenger.phoneNumber,
+			passenger.email,
+			passenger.birthDate,
+			passenger.createdAt,
+			passenger.updatedAt,
+			passenger.rides
+		);
+	}
+
+	async findByEmail(passengerEmail: string): Promise<Passenger | null> {
+		const passenger = await prisma.passenger.findUnique({
+			where: { email: passengerEmail },
+			include: { rides: true }
+		});
+
+		if (!passenger) {
+			return null;
 		}
 
 		return new Passenger(
@@ -83,7 +119,7 @@ export class PassengerRepositoryImpl implements PassengerRepository {
 	}
 
 	async findAll(): Promise<Passenger[]> {
-		const passengers = await this.prisma.passenger.findMany({
+		const passengers = await prisma.passenger.findMany({
 			include: { rides: true }
 		});
 
@@ -107,7 +143,7 @@ export class PassengerRepositoryImpl implements PassengerRepository {
 	}
 
 	async update(dto: Passenger): Promise<Passenger> {
-		const updatedPassenger = await this.prisma.passenger.update({
+		const updatedPassenger = await prisma.passenger.update({
 			where: { id: dto.id },
 			data: {
 				name: dto.name,
@@ -140,7 +176,7 @@ export class PassengerRepositoryImpl implements PassengerRepository {
 	}
 
 	async delete(passengerId: string): Promise<void> {
-		await this.prisma.passenger.delete({
+		await prisma.passenger.delete({
 			where: { id: passengerId }
 		});
 	}

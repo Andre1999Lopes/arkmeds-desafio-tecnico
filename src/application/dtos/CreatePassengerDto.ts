@@ -6,5 +6,5 @@ export interface CreatePassengerDTO {
 	address: string;
 	phoneNumber: string;
 	email: string;
-	birthDate: Date;
+	birthDate: string;
 }

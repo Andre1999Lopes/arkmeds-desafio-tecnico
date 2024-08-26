@@ -1,4 +1,4 @@
-export function isValidCPF(cpf: string): boolean {
+export function isValidCpf(cpf: string): boolean {
 	const cpfStr = cpf.replace(/[^\d]+/g, '');
 
 	if (cpfStr.length !== 11) return false;
