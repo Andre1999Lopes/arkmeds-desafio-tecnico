@@ -40,7 +40,7 @@ passengerRouter
 	.post('/', controller.create)
 	.get('/', controller.findAll)
 	.get('/:id', controller.findById)
-	.put('/', controller.update)
-	.delete('/', controller.delete);
+	.put('/:id', controller.update)
+	.delete('/:id', controller.delete);
 
 export { passengerRouter };

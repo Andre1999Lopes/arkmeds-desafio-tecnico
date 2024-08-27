@@ -1,5 +1,6 @@
-import { CreateDriverDTO } from '../../../application/dtos/CreateDriverDto';
+import { DriverDTO } from '../../../application/dtos/DriverDto';
 import { ValidationService } from '../../../application/services/ValidationService';
+import { UserAlreadyExistsError } from '../../errors/UserAlreadyExistsError';
 import { DriverRepository } from '../../repositories/DriverRepository';
 
 export class CreateDriver {
@@ -21,18 +22,13 @@ export class CreateDriver {
 		return this.instance;
 	}
 
-	async execute(driver: CreateDriverDTO) {
-		this.validationService.validatePassengerOrDriver({
-			cpf: driver.cpf,
-			email: driver.email,
-			phoneNumber: driver.phoneNumber,
-			birthDate: driver.birthDate
-		});
+	async execute(driver: DriverDTO) {
+		this.validationService.validateUser(driver, true);
 
 		const driverWithCpf = await this.driverRepository.findByCpf(driver.cpf);
 
 		if (!!driverWithCpf) {
-			throw new Error('A driver with this CPF already exists');
+			throw new UserAlreadyExistsError('A driver with this CPF already exists');
 		}
 
 		const driverWithEmail = await this.driverRepository.findByEmail(
@@ -40,14 +36,18 @@ export class CreateDriver {
 		);
 
 		if (!!driverWithEmail) {
-			throw new Error('A driver with this email already exists');
+			throw new UserAlreadyExistsError(
+				'A driver with this email already exists'
+			);
 		}
 
 		const driverWithLicenseNumber =
 			await this.driverRepository.findByLicenseNumber(driver.licenseNumber);
 
 		if (!!driverWithLicenseNumber) {
-			throw new Error('A driver with this license number already exists');
+			throw new UserAlreadyExistsError(
+				'A driver with this license number already exists'
+			);
 		}
 
 		const newDriver = await this.driverRepository.create(driver);

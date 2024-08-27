@@ -1,7 +1,10 @@
+import { ValidationError } from '../../domain/errors/ValidationError';
 import { isValidBirthDate } from '../../utils/birthDateValidator';
 import { isValidCpf } from '../../utils/cpfValidator';
 import { isValidEmail } from '../../utils/emailValidator';
 import { isValidPhoneNumber } from '../../utils/phoneValidator';
+import { DriverDTO } from '../dtos/DriverDto';
+import { PassengerDTO } from '../dtos/PassengerDto';
 
 export class ValidationService {
 	private static instance: ValidationService;
@@ -16,26 +19,85 @@ export class ValidationService {
 		return this.instance;
 	}
 
-	validatePassengerOrDriver(data: {
-		cpf: string;
-		email: string;
-		phoneNumber: string;
-		birthDate: string;
-	}) {
-		if (!isValidCpf(data.cpf)) {
-			throw new Error('Invalid CPF');
+	private validateCommonData(
+		data: {
+			name?: string;
+			cpf?: string;
+			age?: string;
+			sex?: string;
+			address?: string;
+			email?: string;
+			phoneNumber?: string;
+			birthDate?: string;
+		},
+		isCreation: boolean
+	) {
+		if (isCreation || data.name) {
+			if (!data.name?.trim()) {
+				throw new ValidationError('Name is required');
+			}
 		}
 
-		if (!isValidEmail(data.email)) {
-			throw new Error('Invalid email');
+		if (isCreation || data.cpf) {
+			if (!isValidCpf(data.cpf)) {
+				throw new ValidationError('Invalid CPF');
+			}
 		}
 
-		if (!isValidPhoneNumber(data.phoneNumber)) {
-			throw new Error('Invalid phone number');
+		if (isCreation || data.age) {
+			if (!data.age || isNaN(parseInt(data.age))) {
+				throw new ValidationError('Invalid age');
+			}
 		}
 
-		if (!isValidBirthDate(data.birthDate)) {
-			throw new Error('Invalid birth date');
+		if (isCreation || data.address) {
+			if (!data.address?.trim()) {
+				throw new ValidationError('Address is required');
+			}
+		}
+
+		if (isCreation || data.email) {
+			if (!isValidEmail(data.email)) {
+				throw new ValidationError('Invalid email');
+			}
+		}
+
+		if (isCreation || data.phoneNumber) {
+			if (!isValidPhoneNumber(data.phoneNumber)) {
+				throw new ValidationError('Invalid phone number');
+			}
+		}
+
+		if (isCreation || data.birthDate) {
+			if (!isValidBirthDate(data.birthDate)) {
+				throw new ValidationError('Invalid birth date');
+			}
+		}
+	}
+
+	validateUser(user: DriverDTO | PassengerDTO, isCreation: boolean) {
+		this.validateCommonData(
+			{
+				name: user.name,
+				cpf: user.cpf,
+				age: user.age,
+				sex: user.sex,
+				address: user.address,
+				email: user.email,
+				phoneNumber: user.phoneNumber,
+				birthDate: user.birthDate
+			},
+			isCreation
+		);
+
+		if (user instanceof DriverDTO) {
+			if (!user.licenseNumber) {
+				throw new ValidationError('Invalid license number');
+			}
+
+			if (!user.vehiclePlate) {
+				throw new ValidationError('Invalid license number');
+			}
 		}
 	}
 }

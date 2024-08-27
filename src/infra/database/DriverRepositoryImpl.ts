@@ -1,4 +1,4 @@
-import { CreateDriverDTO } from '../../application/dtos/CreateDriverDto';
+import { DriverDTO } from '../../application/dtos/DriverDto';
 import { Driver } from '../../domain/entities/Driver';
 import { DriverRepository } from '../../domain/repositories/DriverRepository';
 import { prisma } from '../../main/prisma/client';
@@ -16,30 +16,19 @@ export class DriverRepositoryImpl implements DriverRepository {
 		return this.instance;
 	}
 
-	async create(dto: CreateDriverDTO): Promise<Driver> {
+	async create(driver: DriverDTO): Promise<Driver> {
 		const newDriver = await prisma.driver.create({
-			data: dto,
+			data: {
+				...driver,
+				age: parseInt(driver.age),
+				birthDate: new Date(driver.birthDate)
+			},
 			include: {
 				rides: true
 			}
 		});
 
-		return new Driver(
-			newDriver.id,
-			newDriver.name,
-			newDriver.cpf,
-			newDriver.age,
-			newDriver.sex,
-			newDriver.address,
-			newDriver.phoneNumber,
-			newDriver.email,
-			newDriver.licenseNumber,
-			newDriver.vehiclePlate,
-			newDriver.birthDate,
-			newDriver.createdAt,
-			newDriver.updatedAt,
-			newDriver.rides
-		);
+		return new Driver({ ...newDriver });
 	}
 
 	async findById(driverId: string): Promise<Driver | null> {
@@ -52,22 +41,7 @@ export class DriverRepositoryImpl implements DriverRepository {
 			return null;
 		}
 
-		return new Driver(
-			driver.id,
-			driver.name,
-			driver.cpf,
-			driver.age,
-			driver.sex,
-			driver.address,
-			driver.phoneNumber,
-			driver.email,
-			driver.licenseNumber,
-			driver.vehiclePlate,
-			driver.birthDate,
-			driver.createdAt,
-			driver.updatedAt,
-			driver.rides
-		);
+		return new Driver({ ...driver });
 	}
 
 	async findByCpf(driverCpf: string): Promise<Driver | null> {
@@ -80,22 +54,7 @@ export class DriverRepositoryImpl implements DriverRepository {
 			return null;
 		}
 
-		return new Driver(
-			driver.id,
-			driver.name,
-			driver.cpf,
-			driver.age,
-			driver.sex,
-			driver.address,
-			driver.phoneNumber,
-			driver.email,
-			driver.licenseNumber,
-			driver.vehiclePlate,
-			driver.birthDate,
-			driver.createdAt,
-			driver.updatedAt,
-			driver.rides
-		);
+		return new Driver({ ...driver });
 	}
 
 	async findByLicenseNumber(licenseNumber: string): Promise<Driver | null> {
@@ -108,22 +67,7 @@ export class DriverRepositoryImpl implements DriverRepository {
 			return null;
 		}
 
-		return new Driver(
-			driver.id,
-			driver.name,
-			driver.cpf,
-			driver.age,
-			driver.sex,
-			driver.address,
-			driver.phoneNumber,
-			driver.email,
-			driver.licenseNumber,
-			driver.vehiclePlate,
-			driver.birthDate,
-			driver.createdAt,
-			driver.updatedAt,
-			driver.rides
-		);
+		return new Driver({ ...driver });
 	}
 
 	async findByEmail(driverEmail: string): Promise<Driver | null> {
@@ -136,22 +80,7 @@ export class DriverRepositoryImpl implements DriverRepository {
 			return null;
 		}
 
-		return new Driver(
-			driver.id,
-			driver.name,
-			driver.cpf,
-			driver.age,
-			driver.sex,
-			driver.address,
-			driver.phoneNumber,
-			driver.email,
-			driver.licenseNumber,
-			driver.vehiclePlate,
-			driver.birthDate,
-			driver.createdAt,
-			driver.updatedAt,
-			driver.rides
-		);
+		return new Driver({ ...driver });
 	}
 
 	async findAll(): Promise<Driver[]> {
@@ -159,62 +88,25 @@ export class DriverRepositoryImpl implements DriverRepository {
 			include: { rides: true }
 		});
 
-		return drivers.map(
-			(driver) =>
-				new Driver(
-					driver.id,
-					driver.name,
-					driver.cpf,
-					driver.age,
-					driver.sex,
-					driver.address,
-					driver.phoneNumber,
-					driver.email,
-					driver.licenseNumber,
-					driver.vehiclePlate,
-					driver.birthDate,
-					driver.createdAt,
-					driver.updatedAt,
-					driver.rides
-				)
-		);
+		return drivers.map((driver) => new Driver({ ...driver }));
 	}
 
-	async update(dto: Driver): Promise<Driver> {
+	async update(id: string, driverToUpdate: DriverDTO): Promise<Driver> {
 		const updatedDriver = await prisma.driver.update({
-			where: { id: dto.id },
+			where: { id },
 			data: {
-				name: dto.name,
-				cpf: dto.cpf,
-				age: dto.age,
-				sex: dto.sex,
-				address: dto.address,
-				phoneNumber: dto.phoneNumber,
-				email: dto.email,
-				licenseNumber: dto.licenseNumber,
-				vehiclePlate: dto.vehiclePlate
+				...driverToUpdate,
+				age: driverToUpdate.age ? parseInt(driverToUpdate.age) : undefined,
+				birthDate: driverToUpdate.birthDate
+					? new Date(driverToUpdate.birthDate)
+					: undefined
 			},
 			include: {
 				rides: true
 			}
 		});
 
-		return new Driver(
-			updatedDriver.id,
-			updatedDriver.name,
-			updatedDriver.cpf,
-			updatedDriver.age,
-			updatedDriver.sex,
-			updatedDriver.address,
-			updatedDriver.phoneNumber,
-			updatedDriver.email,
-			updatedDriver.licenseNumber,
-			updatedDriver.vehiclePlate,
-			updatedDriver.birthDate,
-			updatedDriver.createdAt,
-			updatedDriver.updatedAt,
-			updatedDriver.rides
-		);
+		return new Driver({ ...updatedDriver });
 	}
 
 	async delete(driverId: string): Promise<void> {

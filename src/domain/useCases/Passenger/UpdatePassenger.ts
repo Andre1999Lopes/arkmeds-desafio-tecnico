@@ -1,5 +1,7 @@
+import { PassengerDTO } from '../../../application/dtos/PassengerDto';
 import { ValidationService } from '../../../application/services/ValidationService';
-import { Passenger } from '../../entities/Passenger';
+import { UserAlreadyExistsError } from '../../errors/UserAlreadyExistsError';
+import { UserNotFoundError } from '../../errors/UserNotFoundError';
 import { PassengerRepository } from '../../repositories/PassengerRepository';
 
 export class UpdatePassenger {
@@ -24,31 +26,40 @@ export class UpdatePassenger {
 		return this.instance;
 	}
 
-	async execute(passenger: Passenger) {
-		this.validationService.validatePassengerOrDriver({
-			cpf: passenger.cpf,
-			email: passenger.email,
-			phoneNumber: passenger.phoneNumber,
-			birthDate: passenger.birthDate.toISOString()
-		});
+	async execute(id: string, passenger: PassengerDTO) {
+		const passengerExists = !!(await this.passengerRepository.findById(id));
 
-		const passengerWithCpf = await this.passengerRepository.findByCpf(
-			passenger.cpf
-		);
-
-		if (!!passengerWithCpf) {
-			throw new Error('A passenger with this CPF already exists');
+		if (!passengerExists) {
+			throw new UserNotFoundError('There is no user with the given ID');
 		}
 
-		const passengerWithEmail = await this.passengerRepository.findByEmail(
-			passenger.email
-		);
+		this.validationService.validateUser(passenger, false);
 
-		if (!!passengerWithEmail) {
-			throw new Error('A passenger with this email already exists');
+		if (passenger.cpf) {
+			const passengerWithCpf = await this.passengerRepository.findByCpf(
+				passenger.cpf
+			);
+
+			if (!!passengerWithCpf) {
+				throw new UserAlreadyExistsError(
+					'A passenger with this CPF already exists'
+				);
+			}
 		}
 
-		const updatedPassenger = this.passengerRepository.update(passenger);
+		if (passenger.email) {
+			const passengerWithEmail = await this.passengerRepository.findByEmail(
+				passenger.email
+			);
+
+			if (!!passengerWithEmail) {
+				throw new UserAlreadyExistsError(
+					'A passenger with this email already exists'
+				);
+			}
+		}
+
+		const updatedPassenger = this.passengerRepository.update(id, passenger);
 
 		return updatedPassenger;
 	}

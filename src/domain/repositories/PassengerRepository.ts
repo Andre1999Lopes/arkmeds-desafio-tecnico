@@ -1,12 +1,12 @@
-import { CreatePassengerDTO } from '../../application/dtos/CreatePassengerDto';
+import { PassengerDTO } from '../../application/dtos/PassengerDto';
 import { Passenger } from '../entities/Passenger';
 
 export interface PassengerRepository {
-	create(passenger: CreatePassengerDTO): Promise<Passenger>;
+	create(passenger: PassengerDTO): Promise<Passenger>;
 	findById(passengerId: string): Promise<Passenger | null>;
 	findByCpf(passengerCpf: string): Promise<Passenger | null>;
 	findByEmail(passengerEmail: string): Promise<Passenger | null>;
 	findAll(): Promise<Passenger[]>;
-	update(passenger: Passenger): Promise<Passenger>;
+	update(id: string, passenger: PassengerDTO): Promise<Passenger>;
 	delete(passengerId: string): Promise<void>;
 }

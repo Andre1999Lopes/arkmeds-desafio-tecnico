@@ -1,34 +1,23 @@
-import { Ride } from './Ride';
-
-export class Passenger {
-	public id: string;
+export class PassengerDTO {
 	public name: string;
 	public cpf: string;
-	public age: number;
+	public age: string;
 	public sex: string;
 	public address: string;
 	public phoneNumber: string;
 	public email: string;
-	public birthDate: Date;
-	public createdAt: Date;
-	public updatedAt: Date;
-	public rides: Ride[];
+	public birthDate: string;
 
 	constructor(data: {
-		id: string;
 		name: string;
 		cpf: string;
-		age: number;
+		age: string;
 		sex: string;
 		address: string;
 		phoneNumber: string;
 		email: string;
-		birthDate: Date;
-		createdAt: Date;
-		updatedAt: Date;
-		rides: Ride[];
+		birthDate: string;
 	}) {
-		this.id = data.id;
 		this.name = data.name;
 		this.cpf = data.cpf;
 		this.age = data.age;
@@ -37,8 +26,5 @@ export class Passenger {
 		this.phoneNumber = data.phoneNumber;
 		this.email = data.email;
 		this.birthDate = data.birthDate;
-		this.createdAt = data.createdAt;
-		this.updatedAt = data.updatedAt;
-		this.rides = data.rides;
 	}
 }

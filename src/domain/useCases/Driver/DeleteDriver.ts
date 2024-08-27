@@ -1,3 +1,4 @@
+import { UserNotFoundError } from '../../errors/UserNotFoundError';
 import { DriverRepository } from '../../repositories/DriverRepository';
 
 export class DeleteDriver {
@@ -14,6 +15,12 @@ export class DeleteDriver {
 	}
 
 	async execute(driverId: string) {
+		const driverExists = !!(await this.driverRepository.findById(driverId));
+
+		if (!driverExists) {
+			throw new UserNotFoundError('There is no user with the given ID');
+		}
+
 		return await this.driverRepository.delete(driverId);
 	}
 }

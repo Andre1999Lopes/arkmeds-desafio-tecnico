@@ -1,3 +1,4 @@
+import { UserNotFoundError } from '../../errors/UserNotFoundError';
 import { PassengerRepository } from '../../repositories/PassengerRepository';
 
 export class DeletePassenger {
@@ -14,6 +15,14 @@ export class DeletePassenger {
 	}
 
 	async execute(passengerId: string) {
+		const driverExists = !!(await this.passengerRepository.findById(
+			passengerId
+		));
+
+		if (!driverExists) {
+			throw new UserNotFoundError('There is no user with the given ID');
+		}
+
 		return await this.passengerRepository.delete(passengerId);
 	}
 }

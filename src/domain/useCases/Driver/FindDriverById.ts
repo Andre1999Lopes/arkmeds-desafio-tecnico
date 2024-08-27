@@ -1,3 +1,4 @@
+import { UserNotFoundError } from '../../errors/UserNotFoundError';
 import { DriverRepository } from '../../repositories/DriverRepository';
 
 export class FindDriverById {
@@ -14,8 +15,12 @@ export class FindDriverById {
 	}
 
 	async execute(driverId: string) {
-		const user = await this.driverRepository.findById(driverId);
+		const driver = await this.driverRepository.findById(driverId);
 
-		return user;
+		if (!driver) {
+			throw new UserNotFoundError('There is no user with the given ID');
+		}
+
+		return driver;
 	}
 }
