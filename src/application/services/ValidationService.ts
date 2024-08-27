@@ -96,7 +96,7 @@ export class ValidationService {
 			}
 
 			if (!user.vehiclePlate) {
-				throw new ValidationError('Invalid license number');
+				throw new ValidationError('Invalid vehicle plate');
 			}
 		}
 	}
