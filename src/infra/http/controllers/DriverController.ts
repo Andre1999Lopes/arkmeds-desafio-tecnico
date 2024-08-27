@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { DriverDTO } from '../../../application/dtos/DriverDto';
+import { DriverDTO } from '../../../application/dtos/DriverDTO';
 import { UserAlreadyExistsError } from '../../../domain/errors/UserAlreadyExistsError';
 import { UserNotFoundError } from '../../../domain/errors/UserNotFoundError';
 import { ValidationError } from '../../../domain/errors/ValidationError';

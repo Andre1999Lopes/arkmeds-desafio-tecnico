@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { PassengerDTO } from '../../../application/dtos/PassengerDto';
+import { PassengerDTO } from '../../../application/dtos/PassengerDTO';
 import { UserAlreadyExistsError } from '../../../domain/errors/UserAlreadyExistsError';
 import { UserNotFoundError } from '../../../domain/errors/UserNotFoundError';
 import { ValidationError } from '../../../domain/errors/ValidationError';

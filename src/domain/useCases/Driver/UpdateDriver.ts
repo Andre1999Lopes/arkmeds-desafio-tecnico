@@ -1,4 +1,4 @@
-import { DriverDTO } from '../../../application/dtos/DriverDto';
+import { DriverDTO } from '../../../application/dtos/DriverDTO';
 import { ValidationService } from '../../../application/services/ValidationService';
 import { UserAlreadyExistsError } from '../../errors/UserAlreadyExistsError';
 import { UserNotFoundError } from '../../errors/UserNotFoundError';

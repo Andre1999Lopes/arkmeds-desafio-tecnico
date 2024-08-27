@@ -38,7 +38,8 @@ export class CalculateFareUseCase {
 
 		return new FareResponseDTO({
 			price: Math.round(price * 100) / 100,
-			requestId: this.generateRequestId()
+			requestId: this.generateRequestId(),
+			distance: Math.round(distance * 100) / 100
 		});
 	}
 
@@ -56,7 +57,7 @@ export class CalculateFareUseCase {
 				Math.sin(deltaLambda / 2) *
 				Math.sin(deltaLambda / 2);
 		const d = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)) * R;
-		return d;
+		return d; //meters
 	}
 
 	private getTariff(date: Date): number {

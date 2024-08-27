@@ -4,9 +4,9 @@ import { isValidCpf } from '../../utils/cpfValidator';
 import { isValidDateTime } from '../../utils/dateTimeValidator';
 import { isValidEmail } from '../../utils/emailValidator';
 import { isValidPhoneNumber } from '../../utils/phoneValidator';
-import { DriverDTO } from '../dtos/DriverDto';
+import { DriverDTO } from '../dtos/DriverDTO';
 import { LocationPoint } from '../dtos/FareRequestDTO';
-import { PassengerDTO } from '../dtos/PassengerDto';
+import { PassengerDTO } from '../dtos/PassengerDTO';
 
 export class ValidationService {
 	private static instance: ValidationService;

@@ -1,4 +1,4 @@
-import { DriverDTO } from '../../application/dtos/DriverDto';
+import { DriverDTO } from '../../application/dtos/DriverDTO';
 import { Driver } from '../../domain/entities/Driver';
 import { DriverRepository } from '../../domain/repositories/DriverRepository';
 import { prisma } from '../../main/prisma/client';

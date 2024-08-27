@@ -1,4 +1,4 @@
-import { PassengerDTO } from '../../../application/dtos/PassengerDto';
+import { PassengerDTO } from '../../../application/dtos/PassengerDTO';
 import { ValidationService } from '../../../application/services/ValidationService';
 import { UserAlreadyExistsError } from '../../errors/UserAlreadyExistsError';
 import { PassengerRepository } from '../../repositories/PassengerRepository';

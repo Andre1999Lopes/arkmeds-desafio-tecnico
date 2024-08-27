@@ -1,4 +1,4 @@
-import { PassengerDTO } from '../../application/dtos/PassengerDto';
+import { PassengerDTO } from '../../application/dtos/PassengerDTO';
 import { Passenger } from '../entities/Passenger';
 
 export interface PassengerRepository {

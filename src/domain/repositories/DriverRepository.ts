@@ -1,4 +1,4 @@
-import { DriverDTO } from '../../application/dtos/DriverDto';
+import { DriverDTO } from '../../application/dtos/DriverDTO';
 import { Driver } from '../entities/Driver';
 
 export interface DriverRepository {

@@ -1,4 +1,4 @@
-import { PassengerDTO } from '../../application/dtos/PassengerDto';
+import { PassengerDTO } from '../../application/dtos/PassengerDTO';
 import { Passenger } from '../../domain/entities/Passenger';
 import { PassengerRepository } from '../../domain/repositories/PassengerRepository';
 import { prisma } from '../../main/prisma/client';

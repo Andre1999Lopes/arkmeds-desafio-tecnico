@@ -6,10 +6,10 @@ import { FareController } from '../controllers/FareController';
 const fareRouter = Router();
 
 const validationService = ValidationService.getInstance();
-const calculareFareUseCase =
+const calculateFareUseCase =
 	CalculateFareUseCase.getInstance(validationService);
 
-const controller = FareController.getInstance(calculareFareUseCase);
+const controller = FareController.getInstance(calculateFareUseCase);
 
 fareRouter.post('/', controller.getFare);
 
