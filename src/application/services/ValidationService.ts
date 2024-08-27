@@ -1,9 +1,11 @@
 import { ValidationError } from '../../domain/errors/ValidationError';
 import { isValidBirthDate } from '../../utils/birthDateValidator';
 import { isValidCpf } from '../../utils/cpfValidator';
+import { isValidDateTime } from '../../utils/dateTimeValidator';
 import { isValidEmail } from '../../utils/emailValidator';
 import { isValidPhoneNumber } from '../../utils/phoneValidator';
 import { DriverDTO } from '../dtos/DriverDto';
+import { LocationPoint } from '../dtos/FareRequestDTO';
 import { PassengerDTO } from '../dtos/PassengerDto';
 
 export class ValidationService {
@@ -98,6 +100,34 @@ export class ValidationService {
 			if (!user.vehiclePlate) {
 				throw new ValidationError('Invalid vehicle plate');
 			}
+		}
+	}
+
+	validadeFare(from: LocationPoint, to: LocationPoint, date: string) {
+		if (
+			isNaN(parseInt(from.latitude)) &&
+			isNaN(parseInt(from.longitude)) &&
+			parseInt(from.latitude) <= -90 &&
+			parseInt(from.latitude) >= 90 &&
+			parseInt(from.latitude) <= -180 &&
+			parseInt(from.longitude) >= 180
+		) {
+			throw new ValidationError('Invalid initial geolocalization');
+		}
+
+		if (
+			isNaN(parseInt(to.latitude)) &&
+			isNaN(parseInt(to.longitude)) &&
+			parseInt(to.latitude) <= -90 &&
+			parseInt(to.latitude) >= 90 &&
+			parseInt(to.latitude) <= -180 &&
+			parseInt(to.longitude) >= 180
+		) {
+			throw new ValidationError('Invalid final geolocalization');
+		}
+
+		if (!isValidDateTime(date)) {
+			throw new ValidationError('Invalid date');
 		}
 	}
 }
