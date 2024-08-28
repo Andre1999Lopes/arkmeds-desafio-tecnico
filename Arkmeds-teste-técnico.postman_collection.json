@@ -15,13 +15,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://arkmeds-challenge-env.eba-yrfyrp28.sa-east-1.elasticbeanstalk.com/passenger",
-							"protocol": "http",
+							"raw": "https://arkmeds-node-674b5626bc3c.herokuapp.com/passenger",
+							"protocol": "https",
 							"host": [
-								"arkmeds-challenge-env",
-								"eba-yrfyrp28",
-								"sa-east-1",
-								"elasticbeanstalk",
+								"arkmeds-node-674b5626bc3c",
+								"herokuapp",
 								"com"
 							],
 							"path": [
@@ -37,18 +35,16 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://arkmeds-challenge-env.eba-yrfyrp28.sa-east-1.elasticbeanstalk.com/passenger/4814bb97-b105-453d-8749-da7799470ba5",
-							"protocol": "http",
+							"raw": "https://arkmeds-node-674b5626bc3c.herokuapp.com/passenger/5f8f493a-4b28-4545-b283-071e105117ad",
+							"protocol": "https",
 							"host": [
-								"arkmeds-challenge-env",
-								"eba-yrfyrp28",
-								"sa-east-1",
-								"elasticbeanstalk",
+								"arkmeds-node-674b5626bc3c",
+								"herokuapp",
 								"com"
 							],
 							"path": [
 								"passenger",
-								"4814bb97-b105-453d-8749-da7799470ba5"
+								"5f8f493a-4b28-4545-b283-071e105117ad"
 							]
 						}
 					},
@@ -69,13 +65,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://arkmeds-challenge-env.eba-yrfyrp28.sa-east-1.elasticbeanstalk.com/passenger",
-							"protocol": "http",
+							"raw": "https://arkmeds-node-674b5626bc3c.herokuapp.com/passenger",
+							"protocol": "https",
 							"host": [
-								"arkmeds-challenge-env",
-								"eba-yrfyrp28",
-								"sa-east-1",
-								"elasticbeanstalk",
+								"arkmeds-node-674b5626bc3c",
+								"herokuapp",
 								"com"
 							],
 							"path": [
@@ -100,18 +94,16 @@
 							}
 						},
 						"url": {
-							"raw": "http://arkmeds-challenge-env.eba-yrfyrp28.sa-east-1.elasticbeanstalk.com/passenger/b5c84311-539b-42c7-8d1f-39fa1327aa28",
-							"protocol": "http",
+							"raw": "https://arkmeds-node-674b5626bc3c.herokuapp.com/passenger/5f8f493a-4b28-4545-b283-071e105117ad",
+							"protocol": "https",
 							"host": [
-								"arkmeds-challenge-env",
-								"eba-yrfyrp28",
-								"sa-east-1",
-								"elasticbeanstalk",
+								"arkmeds-node-674b5626bc3c",
+								"herokuapp",
 								"com"
 							],
 							"path": [
 								"passenger",
-								"b5c84311-539b-42c7-8d1f-39fa1327aa28"
+								"5f8f493a-4b28-4545-b283-071e105117ad"
 							]
 						}
 					},
@@ -123,18 +115,16 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://arkmeds-challenge-env.eba-yrfyrp28.sa-east-1.elasticbeanstalk.com/passenger/b5c84311-539b-42c7-8d1f-39fa1327aa28",
-							"protocol": "http",
+							"raw": "https://arkmeds-node-674b5626bc3c.herokuapp.com/passenger/5f8f493a-4b28-4545-b283-071e105117ad",
+							"protocol": "https",
 							"host": [
-								"arkmeds-challenge-env",
-								"eba-yrfyrp28",
-								"sa-east-1",
-								"elasticbeanstalk",
+								"arkmeds-node-674b5626bc3c",
+								"herokuapp",
 								"com"
 							],
 							"path": [
 								"passenger",
-								"b5c84311-539b-42c7-8d1f-39fa1327aa28"
+								"5f8f493a-4b28-4545-b283-071e105117ad"
 							]
 						}
 					},
@@ -151,13 +141,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://arkmeds-challenge-env.eba-yrfyrp28.sa-east-1.elasticbeanstalk.com/driver",
-							"protocol": "http",
+							"raw": "https://arkmeds-node-674b5626bc3c.herokuapp.com/driver",
+							"protocol": "https",
 							"host": [
-								"arkmeds-challenge-env",
-								"eba-yrfyrp28",
-								"sa-east-1",
-								"elasticbeanstalk",
+								"arkmeds-node-674b5626bc3c",
+								"herokuapp",
 								"com"
 							],
 							"path": [
@@ -173,18 +161,16 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://arkmeds-challenge-env.eba-yrfyrp28.sa-east-1.elasticbeanstalk.com/driver/b5c84311-539b-42c7-8d1f-39fa1327aa28",
-							"protocol": "http",
+							"raw": "https://arkmeds-node-674b5626bc3c.herokuapp.com/driver/7368cd5a-c2d5-4d78-ad34-7e223f860e18",
+							"protocol": "https",
 							"host": [
-								"arkmeds-challenge-env",
-								"eba-yrfyrp28",
-								"sa-east-1",
-								"elasticbeanstalk",
+								"arkmeds-node-674b5626bc3c",
+								"herokuapp",
 								"com"
 							],
 							"path": [
 								"driver",
-								"b5c84311-539b-42c7-8d1f-39fa1327aa28"
+								"7368cd5a-c2d5-4d78-ad34-7e223f860e18"
 							]
 						}
 					},
@@ -205,13 +191,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://arkmeds-challenge-env.eba-yrfyrp28.sa-east-1.elasticbeanstalk.com/driver",
-							"protocol": "http",
+							"raw": "https://arkmeds-node-674b5626bc3c.herokuapp.com/driver",
+							"protocol": "https",
 							"host": [
-								"arkmeds-challenge-env",
-								"eba-yrfyrp28",
-								"sa-east-1",
-								"elasticbeanstalk",
+								"arkmeds-node-674b5626bc3c",
+								"herokuapp",
 								"com"
 							],
 							"path": [
@@ -236,18 +220,16 @@
 							}
 						},
 						"url": {
-							"raw": "http://arkmeds-challenge-env.eba-yrfyrp28.sa-east-1.elasticbeanstalk.com/driver/b66b7450-88d4-4d06-93ee-ca373fb92647",
-							"protocol": "http",
+							"raw": "https://arkmeds-node-674b5626bc3c.herokuapp.com/driver/7368cd5a-c2d5-4d78-ad34-7e223f860e18",
+							"protocol": "https",
 							"host": [
-								"arkmeds-challenge-env",
-								"eba-yrfyrp28",
-								"sa-east-1",
-								"elasticbeanstalk",
+								"arkmeds-node-674b5626bc3c",
+								"herokuapp",
 								"com"
 							],
 							"path": [
 								"driver",
-								"b66b7450-88d4-4d06-93ee-ca373fb92647"
+								"7368cd5a-c2d5-4d78-ad34-7e223f860e18"
 							]
 						}
 					},
@@ -259,18 +241,16 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://arkmeds-challenge-env.eba-yrfyrp28.sa-east-1.elasticbeanstalk.com/driver/auuashdkasdu",
-							"protocol": "http",
+							"raw": "https://arkmeds-node-674b5626bc3c.herokuapp.com/driver/7368cd5a-c2d5-4d78-ad34-7e223f860e18",
+							"protocol": "https",
 							"host": [
-								"arkmeds-challenge-env",
-								"eba-yrfyrp28",
-								"sa-east-1",
-								"elasticbeanstalk",
+								"arkmeds-node-674b5626bc3c",
+								"herokuapp",
 								"com"
 							],
 							"path": [
 								"driver",
-								"auuashdkasdu"
+								"7368cd5a-c2d5-4d78-ad34-7e223f860e18"
 							]
 						}
 					},
@@ -288,7 +268,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"from\": {\r\n        \"latitude\": 123,\r\n        \"longitude\": 456\r\n    },\r\n    \"to\": {\r\n        \"latitude\": 789,\r\n        \"longitude\": 123\r\n    },\r\n    \"dateTime\": \"2024-08-27T15:08:30-03:00\"\r\n}",
+							"raw": "{\r\n    \"from\": {\r\n        \"latitude\": -16.727777,\r\n        \"longitude\": -43.882070\r\n    },\r\n    \"to\": {\r\n        \"latitude\": -16.709317,\r\n        \"longitude\": -43.858420\r\n    },\r\n    \"dateTime\": \"2024-08-27T15:08:30-03:00\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -296,13 +276,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://arkmeds-challenge-env.eba-yrfyrp28.sa-east-1.elasticbeanstalk.com/fare",
-							"protocol": "http",
+							"raw": "https://arkmeds-node-674b5626bc3c.herokuapp.com/fare",
+							"protocol": "https",
 							"host": [
-								"arkmeds-challenge-env",
-								"eba-yrfyrp28",
-								"sa-east-1",
-								"elasticbeanstalk",
+								"arkmeds-node-674b5626bc3c",
+								"herokuapp",
 								"com"
 							],
 							"path": [
@@ -332,13 +310,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://arkmeds-challenge-env.eba-yrfyrp28.sa-east-1.elasticbeanstalk.com/race",
-							"protocol": "http",
+							"raw": "https://arkmeds-node-674b5626bc3c.herokuapp.com/race",
+							"protocol": "https",
 							"host": [
-								"arkmeds-challenge-env",
-								"eba-yrfyrp28",
-								"sa-east-1",
-								"elasticbeanstalk",
+								"arkmeds-node-674b5626bc3c",
+								"herokuapp",
 								"com"
 							],
 							"path": [
