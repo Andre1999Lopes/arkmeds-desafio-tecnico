@@ -117,12 +117,12 @@ describe('KafkaConsumer', () => {
 		await kafkaConsumer.connect();
 
 		expect(mkdirSyncMock).toHaveBeenCalledWith(
-			path.join(__dirname, '/../tmp', '123'),
+			path.join(__dirname, '../tmp', '123'),
 			{ recursive: true }
 		);
 
 		expect(appendFileSyncMock).toHaveBeenCalledWith(
-			path.join(__dirname, '..//tmp', '123', `2024-08-27.txt`),
+			path.join(__dirname, '../tmp', '123', `2024-08-27.txt`),
 			JSON.stringify(
 				{
 					userId: '123',
