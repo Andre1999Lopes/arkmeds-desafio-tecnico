@@ -4,7 +4,7 @@
   "description": "",
   "main": "dist/main/server.js",
   "scripts": {
-    "start": "prisma migrate deploy && node dist/main/server.js",
+    "start": "node main/server.js",
     "build": "tsc",
     "dev-start": "tsx watch src/main/server.ts",
     "test": "jest --coverage"

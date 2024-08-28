@@ -11,11 +11,8 @@ app.listen(PORT, async () => {
 		await prisma.$connect();
 		console.log('Database connected');
 		await KafkaConsumer.getInstance().connect();
-	} catch (error) {
-		console.log(
-			'Error initializion server:',
-			JSON.stringify(error, null, '\t')
-		);
+	} catch (error: any) {
+		console.log('Error initializion server:', error.message);
 		process.exit(1);
 	}
 });
