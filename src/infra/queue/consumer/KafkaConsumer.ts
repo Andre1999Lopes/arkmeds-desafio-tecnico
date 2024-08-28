@@ -42,6 +42,8 @@ export class KafkaConsumer {
 		await this.consumer.run({
 			eachMessage: async ({ message }) => {
 				const raceData = JSON.parse(message.value!.toString()) as MessageDTO;
+				console.log(raceData);
+				console.log(__dirname);
 				const receiptPath = path.join(
 					__dirname,
 					'../../../tmp',
