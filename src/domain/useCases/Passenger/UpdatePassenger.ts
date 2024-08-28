@@ -26,8 +26,11 @@ export class UpdatePassenger {
 		return this.instance;
 	}
 
-	async execute(id: string, passenger: PassengerDTO) {
-		const passengerExists = !!(await this.passengerRepository.findById(id));
+	async execute(passengerId: string, passenger: PassengerDTO) {
+		this.validationService.validateUuid(passengerId);
+		const passengerExists = !!(await this.passengerRepository.findById(
+			passengerId
+		));
 
 		if (!passengerExists) {
 			throw new UserNotFoundError('There is no user with the given ID');
@@ -59,7 +62,10 @@ export class UpdatePassenger {
 			}
 		}
 
-		const updatedPassenger = this.passengerRepository.update(id, passenger);
+		const updatedPassenger = this.passengerRepository.update(
+			passengerId,
+			passenger
+		);
 
 		return updatedPassenger;
 	}

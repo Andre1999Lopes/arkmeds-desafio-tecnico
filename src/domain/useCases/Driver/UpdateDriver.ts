@@ -23,8 +23,9 @@ export class UpdateDriver {
 		return this.instance;
 	}
 
-	async execute(id: string, driver: DriverDTO) {
-		const driverExists = !!(await this.driverRepository.findById(id));
+	async execute(driverId: string, driver: DriverDTO) {
+		this.validationService.validateUuid(driverId);
+		const driverExists = !!(await this.driverRepository.findById(driverId));
 
 		if (!driverExists) {
 			throw new UserNotFoundError('There is no user with the given ID');
@@ -69,7 +70,7 @@ export class UpdateDriver {
 			}
 		}
 
-		const updatedDriver = this.driverRepository.update(id, driver);
+		const updatedDriver = this.driverRepository.update(driverId, driver);
 
 		return updatedDriver;
 	}

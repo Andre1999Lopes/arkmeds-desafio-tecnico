@@ -4,6 +4,7 @@ import { isValidCpf } from '../../utils/cpfValidator';
 import { isValidDateTime } from '../../utils/dateTimeValidator';
 import { isValidEmail } from '../../utils/emailValidator';
 import { isValidPhoneNumber } from '../../utils/phoneValidator';
+import { isValidUuid } from '../../utils/uuidValidator';
 import { DriverDTO } from '../dtos/DriverDTO';
 import { LocationPoint } from '../dtos/FareRequestDTO';
 import { PassengerDTO } from '../dtos/PassengerDTO';
@@ -93,34 +94,38 @@ export class ValidationService {
 		);
 
 		if (user instanceof DriverDTO) {
-			if (!user.licenseNumber) {
-				throw new ValidationError('Invalid license number');
+			if (isCreation || !!user.licenseNumber) {
+				if (!user.licenseNumber) {
+					throw new ValidationError('Invalid license number');
+				}
 			}
 
-			if (!user.vehiclePlate) {
-				throw new ValidationError('Invalid vehicle plate');
+			if (isCreation || !!user.vehiclePlate) {
+				if (!user.vehiclePlate) {
+					throw new ValidationError('Invalid vehicle plate');
+				}
 			}
 		}
 	}
 
 	validadeFare(from: LocationPoint, to: LocationPoint, date: string) {
 		if (
-			isNaN(parseInt(from.latitude)) &&
-			isNaN(parseInt(from.longitude)) &&
-			parseInt(from.latitude) <= -90 &&
-			parseInt(from.latitude) >= 90 &&
-			parseInt(from.latitude) <= -180 &&
+			isNaN(parseInt(from.latitude)) ||
+			isNaN(parseInt(from.longitude)) ||
+			parseInt(from.latitude) <= -90 ||
+			parseInt(from.latitude) >= 90 ||
+			parseInt(from.latitude) <= -180 ||
 			parseInt(from.longitude) >= 180
 		) {
 			throw new ValidationError('Invalid initial geolocalization');
 		}
 
 		if (
-			isNaN(parseInt(to.latitude)) &&
-			isNaN(parseInt(to.longitude)) &&
-			parseInt(to.latitude) <= -90 &&
-			parseInt(to.latitude) >= 90 &&
-			parseInt(to.latitude) <= -180 &&
+			isNaN(parseInt(to.latitude)) ||
+			isNaN(parseInt(to.longitude)) ||
+			parseInt(to.latitude) <= -90 ||
+			parseInt(to.latitude) >= 90 ||
+			parseInt(to.latitude) <= -180 ||
 			parseInt(to.longitude) >= 180
 		) {
 			throw new ValidationError('Invalid final geolocalization');
@@ -128,6 +133,12 @@ export class ValidationService {
 
 		if (!isValidDateTime(date)) {
 			throw new ValidationError('Invalid date');
+		}
+	}
+
+	validateUuid(uuid: string) {
+		if (!isValidUuid(uuid)) {
+			throw new ValidationError('Invalid UUID');
 		}
 	}
 }

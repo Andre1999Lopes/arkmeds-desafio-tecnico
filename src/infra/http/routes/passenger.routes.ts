@@ -19,14 +19,19 @@ const createPassengerUseCase = CreatePassenger.getInstance(
 );
 const findAllPassengersUseCase =
 	FindAllPassengers.getInstance(passengerRepository);
-const findPassengerByIdUseCase =
-	FindPassengerById.getInstance(passengerRepository);
+const findPassengerByIdUseCase = FindPassengerById.getInstance(
+	passengerRepository,
+	validationService
+);
 
 const updatePassengerUseCase = UpdatePassenger.getInstance(
 	passengerRepository,
 	validationService
 );
-const deletePassengerUseCase = DeletePassenger.getInstance(passengerRepository);
+const deletePassengerUseCase = DeletePassenger.getInstance(
+	passengerRepository,
+	validationService
+);
 
 const controller = PassengerController.getInstance(
 	createPassengerUseCase,

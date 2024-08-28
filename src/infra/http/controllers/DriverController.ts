@@ -51,7 +51,7 @@ export class DriverController {
 			const newDriver = new DriverDTO({ ...req.body });
 			const driver = await this.createDriver.execute(newDriver);
 			return res
-				.status(200)
+				.status(201)
 				.json({ message: 'Driver created successfully', data: driver });
 		} catch (error: any) {
 			if (error instanceof ValidationError) {
@@ -89,6 +89,10 @@ export class DriverController {
 		} catch (error: any) {
 			if (error instanceof UserNotFoundError) {
 				return res.status(404).json({ message: error.message });
+			}
+
+			if (error instanceof ValidationError) {
+				return res.status(422).json({ message: error.message });
 			}
 
 			return res.status(500).json({ message: error.message });
@@ -131,6 +135,10 @@ export class DriverController {
 		} catch (error: any) {
 			if (error instanceof UserNotFoundError) {
 				return res.status(404).json({ message: error.message });
+			}
+
+			if (error instanceof ValidationError) {
+				return res.status(422).json({ message: error.message });
 			}
 
 			return res.status(500).json({ message: error.message });

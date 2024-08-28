@@ -18,13 +18,19 @@ const createDriverUseCase = CreateDriver.getInstance(
 	validationService
 );
 const findAllDriversUseCase = FindAllDrivers.getInstance(driverRepository);
-const findDriverByIdUseCase = FindDriverById.getInstance(driverRepository);
+const findDriverByIdUseCase = FindDriverById.getInstance(
+	driverRepository,
+	validationService
+);
 
 const updateDriverUseCase = UpdateDriver.getInstance(
 	driverRepository,
 	validationService
 );
-const deleteDriverUseCase = DeleteDriver.getInstance(driverRepository);
+const deleteDriverUseCase = DeleteDriver.getInstance(
+	driverRepository,
+	validationService
+);
 
 const controller = DriverController.getInstance(
 	createDriverUseCase,

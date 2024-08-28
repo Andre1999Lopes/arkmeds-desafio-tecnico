@@ -91,6 +91,10 @@ export class PassengerController {
 				return res.status(404).json({ message: error.message });
 			}
 
+			if (error instanceof ValidationError) {
+				return res.status(422).json({ message: error.message });
+			}
+
 			return res.status(500).json({ message: error.message });
 		}
 	}
@@ -134,6 +138,10 @@ export class PassengerController {
 		} catch (error: any) {
 			if (error instanceof UserNotFoundError) {
 				return res.status(404).json({ message: error.message });
+			}
+
+			if (error instanceof ValidationError) {
+				return res.status(422).json({ message: error.message });
 			}
 
 			return res.status(500).json({ message: error.message });
