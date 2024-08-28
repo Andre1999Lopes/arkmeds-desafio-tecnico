@@ -4,7 +4,7 @@
   "description": "",
   "main": "dist/main/server.js",
   "scripts": {
-    "start": "ls -a && node dist/main/server.js",
+    "start": "ls -a src/main && pwd && node dist/main/server.js",
     "build": "tsc",
     "dev-start": "tsx watch src/main/server.ts",
     "test": "jest --coverage"
