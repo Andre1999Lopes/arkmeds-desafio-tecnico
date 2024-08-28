@@ -20,14 +20,15 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Run migrations
+        run: npx prisma migrate deploy
+        env:
+          DATABASE_URL: ${{secrets.DATABASE_URL}}
+
       - name: Run tests and check coverage
-        run: |
-          echo ----------------
-          pwd
-          echo ----------------
-          ls -a
-          echo ----------------
-          npm run test
+        run: npm run test
+        env:
+          DATABASE_URL: ${{secrets.DATABASE_URL}}
 
       - name: Build project
         run: npm run build
@@ -41,6 +42,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: ${{ secrets.AWS_REGION }}
         run: |
-          pip install awsebcli --upgrade
-          eb init -p node.js --region $AWS_REGION my-app
-          eb deploy
+            pip install awsebcli --upgrade
+            eb init --platform node.js --region ${{ secrets.AWS_REGION }} arkmeds-node
+            eb use Arkmeds-node-env
+            eb deploy
