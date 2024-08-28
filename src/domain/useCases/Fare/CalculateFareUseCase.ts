@@ -45,10 +45,10 @@ export class CalculateFareUseCase {
 
 	private calculateDistance(from: LocationPoint, to: LocationPoint): number {
 		const R = 6371e3;
-		const p1 = (parseInt(from.latitude) * Math.PI) / 180;
-		const p2 = (parseInt(to.latitude) * Math.PI) / 180;
+		const p1 = (parseFloat(from.latitude) * Math.PI) / 180;
+		const p2 = (parseFloat(to.latitude) * Math.PI) / 180;
 		const deltaP = p2 - p1;
-		const deltaLon = parseInt(to.longitude) - parseInt(from.longitude);
+		const deltaLon = parseFloat(to.longitude) - parseFloat(from.longitude);
 		const deltaLambda = (deltaLon * Math.PI) / 180;
 		const a =
 			Math.sin(deltaP / 2) * Math.sin(deltaP / 2) +
