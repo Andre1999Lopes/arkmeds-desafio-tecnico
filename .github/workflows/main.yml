@@ -44,4 +44,5 @@ jobs:
         run: |
           pip install awsebcli --upgrade
           eb init -p node.js --region $AWS_REGION my-app
+          eb use Arkmeds-node-env
           eb deploy
