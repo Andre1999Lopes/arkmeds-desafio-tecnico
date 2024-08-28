@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { AcceptRaceRequestDTO } from '../../../application/dtos/AcceptRaceRequestDTO';
-import { UserNotFoundError } from '../../../domain/errors/UserNotFoundError';
+import { ValidationError } from '../../../domain/errors/ValidationError';
 import { AcceptRaceUseCase } from '../../../domain/useCases/Race/AcceptRaceUseCase';
 
 export class RaceController {
@@ -24,8 +24,8 @@ export class RaceController {
 			await this.acceptRaceUseCase.execute(raceData);
 			return res.status(200).json({ message: 'Race accepted' });
 		} catch (error: any) {
-			if (error instanceof UserNotFoundError) {
-				return res.status(404).json({ message: error.message });
+			if (error instanceof ValidationError) {
+				return res.status(422).json({ message: error.message });
 			}
 
 			return res.status(500).json({ message: 'Internal server error' });
