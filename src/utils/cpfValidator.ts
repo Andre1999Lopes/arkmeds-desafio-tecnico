@@ -1,7 +1,13 @@
-export function isValidCpf(cpf: string): boolean {
+export function isValidCpf(cpf?: string): boolean {
+	if (!cpf) {
+		return false;
+	}
+
 	const cpfStr = cpf.replace(/[^\d]+/g, '');
 
-	if (cpfStr.length !== 11) return false;
+	if (cpfStr.length !== 11) {
+		return false;
+	}
 
 	const firstSum = cpfStr
 		.split('')
@@ -13,7 +19,6 @@ export function isValidCpf(cpf: string): boolean {
 		.split('')
 		.slice(0, 10)
 		.reduce((acc, num, i) => acc + parseInt(num, 10) * (11 - i), 0);
-
 	const secondCheckDigit = ((secondSum * 10) % 11) % 10;
 
 	return (

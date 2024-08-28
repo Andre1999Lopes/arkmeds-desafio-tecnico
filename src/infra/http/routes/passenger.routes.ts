@@ -19,14 +19,19 @@ const createPassengerUseCase = CreatePassenger.getInstance(
 );
 const findAllPassengersUseCase =
 	FindAllPassengers.getInstance(passengerRepository);
-const findPassengerByIdUseCase =
-	FindPassengerById.getInstance(passengerRepository);
+const findPassengerByIdUseCase = FindPassengerById.getInstance(
+	passengerRepository,
+	validationService
+);
 
 const updatePassengerUseCase = UpdatePassenger.getInstance(
 	passengerRepository,
 	validationService
 );
-const deletePassengerUseCase = DeletePassenger.getInstance(passengerRepository);
+const deletePassengerUseCase = DeletePassenger.getInstance(
+	passengerRepository,
+	validationService
+);
 
 const controller = PassengerController.getInstance(
 	createPassengerUseCase,
@@ -40,7 +45,7 @@ passengerRouter
 	.post('/', controller.create)
 	.get('/', controller.findAll)
 	.get('/:id', controller.findById)
-	.put('/', controller.update)
-	.delete('/', controller.delete);
+	.put('/:id', controller.update)
+	.delete('/:id', controller.delete);
 
 export { passengerRouter };

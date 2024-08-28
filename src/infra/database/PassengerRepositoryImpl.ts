@@ -1,4 +1,4 @@
-import { CreatePassengerDTO } from '../../application/dtos/CreatePassengerDto';
+import { PassengerDTO } from '../../application/dtos/PassengerDTO';
 import { Passenger } from '../../domain/entities/Passenger';
 import { PassengerRepository } from '../../domain/repositories/PassengerRepository';
 import { prisma } from '../../main/prisma/client';
@@ -16,28 +16,19 @@ export class PassengerRepositoryImpl implements PassengerRepository {
 		return this.instance;
 	}
 
-	async create(dto: CreatePassengerDTO): Promise<Passenger> {
+	async create(passenger: PassengerDTO): Promise<Passenger> {
 		const newPassenger = await prisma.passenger.create({
-			data: dto,
+			data: {
+				...passenger,
+				age: parseInt(passenger.age),
+				birthDate: new Date(passenger.birthDate)
+			},
 			include: {
 				rides: true
 			}
 		});
 
-		return new Passenger(
-			newPassenger.id,
-			newPassenger.name,
-			newPassenger.cpf,
-			newPassenger.age,
-			newPassenger.sex,
-			newPassenger.address,
-			newPassenger.phoneNumber,
-			newPassenger.email,
-			newPassenger.birthDate,
-			newPassenger.createdAt,
-			newPassenger.updatedAt,
-			newPassenger.rides
-		);
+		return new Passenger({ ...newPassenger });
 	}
 
 	async findById(passengerId: string): Promise<Passenger | null> {
@@ -50,20 +41,7 @@ export class PassengerRepositoryImpl implements PassengerRepository {
 			return null;
 		}
 
-		return new Passenger(
-			passenger.id,
-			passenger.name,
-			passenger.cpf,
-			passenger.age,
-			passenger.sex,
-			passenger.address,
-			passenger.phoneNumber,
-			passenger.email,
-			passenger.birthDate,
-			passenger.createdAt,
-			passenger.updatedAt,
-			passenger.rides
-		);
+		return new Passenger({ ...passenger });
 	}
 
 	async findByCpf(passengerCpf: string): Promise<Passenger | null> {
@@ -76,20 +54,7 @@ export class PassengerRepositoryImpl implements PassengerRepository {
 			return null;
 		}
 
-		return new Passenger(
-			passenger.id,
-			passenger.name,
-			passenger.cpf,
-			passenger.age,
-			passenger.sex,
-			passenger.address,
-			passenger.phoneNumber,
-			passenger.email,
-			passenger.birthDate,
-			passenger.createdAt,
-			passenger.updatedAt,
-			passenger.rides
-		);
+		return new Passenger({ ...passenger });
 	}
 
 	async findByEmail(passengerEmail: string): Promise<Passenger | null> {
@@ -102,20 +67,7 @@ export class PassengerRepositoryImpl implements PassengerRepository {
 			return null;
 		}
 
-		return new Passenger(
-			passenger.id,
-			passenger.name,
-			passenger.cpf,
-			passenger.age,
-			passenger.sex,
-			passenger.address,
-			passenger.phoneNumber,
-			passenger.email,
-			passenger.birthDate,
-			passenger.createdAt,
-			passenger.updatedAt,
-			passenger.rides
-		);
+		return new Passenger({ ...passenger });
 	}
 
 	async findAll(): Promise<Passenger[]> {
@@ -123,56 +75,25 @@ export class PassengerRepositoryImpl implements PassengerRepository {
 			include: { rides: true }
 		});
 
-		return passengers.map(
-			(passenger) =>
-				new Passenger(
-					passenger.id,
-					passenger.name,
-					passenger.cpf,
-					passenger.age,
-					passenger.sex,
-					passenger.address,
-					passenger.phoneNumber,
-					passenger.email,
-					passenger.birthDate,
-					passenger.createdAt,
-					passenger.updatedAt,
-					passenger.rides
-				)
-		);
+		return passengers.map((passenger) => new Passenger({ ...passenger }));
 	}
 
-	async update(dto: Passenger): Promise<Passenger> {
+	async update(id: string, passenger: PassengerDTO): Promise<Passenger> {
 		const updatedPassenger = await prisma.passenger.update({
-			where: { id: dto.id },
+			where: { id: id },
 			data: {
-				name: dto.name,
-				cpf: dto.cpf,
-				age: dto.age,
-				sex: dto.sex,
-				address: dto.address,
-				phoneNumber: dto.phoneNumber,
-				email: dto.email
+				...passenger,
+				age: passenger.age ? parseInt(passenger.age) : undefined,
+				birthDate: passenger.birthDate
+					? new Date(passenger.birthDate)
+					: undefined
 			},
 			include: {
 				rides: true
 			}
 		});
 
-		return new Passenger(
-			updatedPassenger.id,
-			updatedPassenger.name,
-			updatedPassenger.cpf,
-			updatedPassenger.age,
-			updatedPassenger.sex,
-			updatedPassenger.address,
-			updatedPassenger.phoneNumber,
-			updatedPassenger.email,
-			updatedPassenger.birthDate,
-			updatedPassenger.createdAt,
-			updatedPassenger.updatedAt,
-			updatedPassenger.rides
-		);
+		return new Passenger({ ...updatedPassenger });
 	}
 
 	async delete(passengerId: string): Promise<void> {

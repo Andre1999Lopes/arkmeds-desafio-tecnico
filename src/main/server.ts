@@ -1,4 +1,5 @@
 import 'dotenv/config';
+import { KafkaConsumer } from '../infra/queue/consumer/KafkaConsumer';
 import app from './app';
 import { prisma } from './prisma/client';
 
@@ -9,9 +10,10 @@ app.listen(PORT, async () => {
 		console.log('server is running');
 		await prisma.$connect();
 		console.log('Database connected');
+		await KafkaConsumer.getInstance().connect();
 	} catch (error) {
 		console.log(
-			'Error connecting to database:',
+			'Error initializion server:',
 			JSON.stringify(error, null, '\t')
 		);
 		process.exit(1);

@@ -1,158 +1,116 @@
-import { PrismaClient } from '@prisma/client';
-import { CreateDriverDTO } from '../../application/dtos/CreateDriverDto';
+import { DriverDTO } from '../../application/dtos/DriverDTO';
 import { Driver } from '../../domain/entities/Driver';
 import { DriverRepository } from '../../domain/repositories/DriverRepository';
+import { prisma } from '../../main/prisma/client';
 
 export class DriverRepositoryImpl implements DriverRepository {
-	private prisma = new PrismaClient();
+	private static instance: DriverRepositoryImpl;
 
-	async create(dto: CreateDriverDTO): Promise<Driver> {
-		const newDriver = await this.prisma.driver.create({
-			data: dto,
-			include: {
-				rides: true
-			}
-		});
+	private constructor() {}
 
-		return new Driver(
-			newDriver.id,
-			newDriver.name,
-			newDriver.cpf,
-			newDriver.age,
-			newDriver.sex,
-			newDriver.address,
-			newDriver.phoneNumber,
-			newDriver.email,
-			newDriver.licenseNumber,
-			newDriver.vehiclePlate,
-			newDriver.birthDate,
-			newDriver.createdAt,
-			newDriver.updatedAt,
-			newDriver.rides
-		);
-	}
-
-	async findById(driverId: string): Promise<Driver> {
-		const driver = await this.prisma.driver.findUnique({
-			where: { id: driverId },
-			include: { rides: true }
-		});
-
-		if (!driver) {
-			throw new Error('Driver not found');
+	static getInstance() {
+		if (!this.instance) {
+			this.instance = new DriverRepositoryImpl();
 		}
 
-		return new Driver(
-			driver.id,
-			driver.name,
-			driver.cpf,
-			driver.age,
-			driver.sex,
-			driver.address,
-			driver.phoneNumber,
-			driver.email,
-			driver.licenseNumber,
-			driver.vehiclePlate,
-			driver.birthDate,
-			driver.createdAt,
-			driver.updatedAt,
-			driver.rides
-		);
+		return this.instance;
 	}
 
-	async findByCpf(driverCpf: string): Promise<Driver> {
-		const driver = await this.prisma.driver.findUnique({
-			where: { cpf: driverCpf },
-			include: { rides: true }
-		});
-
-		if (!driver) {
-			throw new Error('Driver not found');
-		}
-
-		return new Driver(
-			driver.id,
-			driver.name,
-			driver.cpf,
-			driver.age,
-			driver.sex,
-			driver.address,
-			driver.phoneNumber,
-			driver.email,
-			driver.licenseNumber,
-			driver.vehiclePlate,
-			driver.birthDate,
-			driver.createdAt,
-			driver.updatedAt,
-			driver.rides
-		);
-	}
-
-	async findAll(): Promise<Driver[]> {
-		const drivers = await this.prisma.driver.findMany({
-			include: { rides: true }
-		});
-
-		return drivers.map(
-			(driver) =>
-				new Driver(
-					driver.id,
-					driver.name,
-					driver.cpf,
-					driver.age,
-					driver.sex,
-					driver.address,
-					driver.phoneNumber,
-					driver.email,
-					driver.licenseNumber,
-					driver.vehiclePlate,
-					driver.birthDate,
-					driver.createdAt,
-					driver.updatedAt,
-					driver.rides
-				)
-		);
-	}
-
-	async update(dto: Driver): Promise<Driver> {
-		const updatedDriver = await this.prisma.driver.update({
-			where: { id: dto.id },
+	async create(driver: DriverDTO): Promise<Driver> {
+		const newDriver = await prisma.driver.create({
 			data: {
-				name: dto.name,
-				cpf: dto.cpf,
-				age: dto.age,
-				sex: dto.sex,
-				address: dto.address,
-				phoneNumber: dto.phoneNumber,
-				email: dto.email,
-				licenseNumber: dto.licenseNumber,
-				vehiclePlate: dto.vehiclePlate
+				...driver,
+				age: parseInt(driver.age),
+				birthDate: new Date(driver.birthDate)
 			},
 			include: {
 				rides: true
 			}
 		});
 
-		return new Driver(
-			updatedDriver.id,
-			updatedDriver.name,
-			updatedDriver.cpf,
-			updatedDriver.age,
-			updatedDriver.sex,
-			updatedDriver.address,
-			updatedDriver.phoneNumber,
-			updatedDriver.email,
-			updatedDriver.licenseNumber,
-			updatedDriver.vehiclePlate,
-			updatedDriver.birthDate,
-			updatedDriver.createdAt,
-			updatedDriver.updatedAt,
-			updatedDriver.rides
-		);
+		return new Driver({ ...newDriver });
+	}
+
+	async findById(driverId: string): Promise<Driver | null> {
+		const driver = await prisma.driver.findUnique({
+			where: { id: driverId },
+			include: { rides: true }
+		});
+
+		if (!driver) {
+			return null;
+		}
+
+		return new Driver({ ...driver });
+	}
+
+	async findByCpf(driverCpf: string): Promise<Driver | null> {
+		const driver = await prisma.driver.findUnique({
+			where: { cpf: driverCpf },
+			include: { rides: true }
+		});
+
+		if (!driver) {
+			return null;
+		}
+
+		return new Driver({ ...driver });
+	}
+
+	async findByLicenseNumber(licenseNumber: string): Promise<Driver | null> {
+		const driver = await prisma.driver.findUnique({
+			where: { licenseNumber },
+			include: { rides: true }
+		});
+
+		if (!driver) {
+			return null;
+		}
+
+		return new Driver({ ...driver });
+	}
+
+	async findByEmail(driverEmail: string): Promise<Driver | null> {
+		const driver = await prisma.driver.findUnique({
+			where: { email: driverEmail },
+			include: { rides: true }
+		});
+
+		if (!driver) {
+			return null;
+		}
+
+		return new Driver({ ...driver });
+	}
+
+	async findAll(): Promise<Driver[]> {
+		const drivers = await prisma.driver.findMany({
+			include: { rides: true }
+		});
+
+		return drivers.map((driver) => new Driver({ ...driver }));
+	}
+
+	async update(id: string, driverToUpdate: DriverDTO): Promise<Driver> {
+		const updatedDriver = await prisma.driver.update({
+			where: { id },
+			data: {
+				...driverToUpdate,
+				age: driverToUpdate.age ? parseInt(driverToUpdate.age) : undefined,
+				birthDate: driverToUpdate.birthDate
+					? new Date(driverToUpdate.birthDate)
+					: undefined
+			},
+			include: {
+				rides: true
+			}
+		});
+
+		return new Driver({ ...updatedDriver });
 	}
 
 	async delete(driverId: string): Promise<void> {
-		await this.prisma.driver.delete({
+		await prisma.driver.delete({
 			where: { id: driverId }
 		});
 	}
