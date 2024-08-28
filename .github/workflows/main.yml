@@ -43,7 +43,7 @@ jobs:
           AWS_REGION: ${{ secrets.AWS_REGION }}
         run: |
             pip install awsebcli --upgrade
-            eb init -p node.js --region ${{ secrets.AWS_REGION }} arkmeds-node
+            eb init --platform node.js --region ${{ secrets.AWS_REGION }} arkmeds-node
             eb appversion -a arkmeds-node
             eb use Arkmeds-node-env
             eb deploy
