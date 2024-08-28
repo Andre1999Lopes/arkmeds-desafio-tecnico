@@ -21,7 +21,11 @@ jobs:
         run: npm install
 
       - name: Run tests and check coverage
-        run: npm test
+        run: |
+          echo ----------------
+          pwd
+          echo ----------------
+          npm test
 
       - name: Build project
         run: npm run build
