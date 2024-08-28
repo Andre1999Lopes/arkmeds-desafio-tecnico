@@ -27,7 +27,7 @@ jobs:
           echo ----------------
           ls -a
           echo ----------------
-          npm test
+          npm run test
 
       - name: Build project
         run: npm run build
