@@ -25,6 +25,8 @@ jobs:
           echo ----------------
           pwd
           echo ----------------
+          ls -a
+          echo ----------------
           npm test
 
       - name: Build project
