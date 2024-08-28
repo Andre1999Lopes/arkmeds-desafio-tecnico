@@ -1,0 +1,354 @@
+{
+	"info": {
+		"_postman_id": "396f2b3d-3861-48d0-9e30-ab774279ffe8",
+		"name": "Arkmeds-teste-técnico",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28336152"
+	},
+	"item": [
+		{
+			"name": "Passenger",
+			"item": [
+				{
+					"name": "Get all pasengers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://arkmeds-challenge-env.eba-yrfyrp28.sa-east-1.elasticbeanstalk.com/passenger",
+							"protocol": "http",
+							"host": [
+								"arkmeds-challenge-env",
+								"eba-yrfyrp28",
+								"sa-east-1",
+								"elasticbeanstalk",
+								"com"
+							],
+							"path": [
+								"passenger"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get passenger by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://arkmeds-challenge-env.eba-yrfyrp28.sa-east-1.elasticbeanstalk.com/passenger/4814bb97-b105-453d-8749-da7799470ba5",
+							"protocol": "http",
+							"host": [
+								"arkmeds-challenge-env",
+								"eba-yrfyrp28",
+								"sa-east-1",
+								"elasticbeanstalk",
+								"com"
+							],
+							"path": [
+								"passenger",
+								"4814bb97-b105-453d-8749-da7799470ba5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create new passenger",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"André\",\r\n\t\"cpf\": \"12345678909\",\r\n\t\"age\": \"25\",\r\n\t\"sex\": \"male\",\r\n\t\"address\": \"Um st 75\",\r\n\t\"phoneNumber\": \"38999999999\",\r\n\t\"email\": \"email@email.com\",\r\n\t\"birthDate\": \"03/08/1999\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://arkmeds-challenge-env.eba-yrfyrp28.sa-east-1.elasticbeanstalk.com/passenger",
+							"protocol": "http",
+							"host": [
+								"arkmeds-challenge-env",
+								"eba-yrfyrp28",
+								"sa-east-1",
+								"elasticbeanstalk",
+								"com"
+							],
+							"path": [
+								"passenger"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update passenger",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"André Lopes\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://arkmeds-challenge-env.eba-yrfyrp28.sa-east-1.elasticbeanstalk.com/passenger/b5c84311-539b-42c7-8d1f-39fa1327aa28",
+							"protocol": "http",
+							"host": [
+								"arkmeds-challenge-env",
+								"eba-yrfyrp28",
+								"sa-east-1",
+								"elasticbeanstalk",
+								"com"
+							],
+							"path": [
+								"passenger",
+								"b5c84311-539b-42c7-8d1f-39fa1327aa28"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete passenger",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://arkmeds-challenge-env.eba-yrfyrp28.sa-east-1.elasticbeanstalk.com/passenger/b5c84311-539b-42c7-8d1f-39fa1327aa28",
+							"protocol": "http",
+							"host": [
+								"arkmeds-challenge-env",
+								"eba-yrfyrp28",
+								"sa-east-1",
+								"elasticbeanstalk",
+								"com"
+							],
+							"path": [
+								"passenger",
+								"b5c84311-539b-42c7-8d1f-39fa1327aa28"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Driver",
+			"item": [
+				{
+					"name": "Get all drivers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://arkmeds-challenge-env.eba-yrfyrp28.sa-east-1.elasticbeanstalk.com/driver",
+							"protocol": "http",
+							"host": [
+								"arkmeds-challenge-env",
+								"eba-yrfyrp28",
+								"sa-east-1",
+								"elasticbeanstalk",
+								"com"
+							],
+							"path": [
+								"driver"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get driver by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://arkmeds-challenge-env.eba-yrfyrp28.sa-east-1.elasticbeanstalk.com/driver/b5c84311-539b-42c7-8d1f-39fa1327aa28",
+							"protocol": "http",
+							"host": [
+								"arkmeds-challenge-env",
+								"eba-yrfyrp28",
+								"sa-east-1",
+								"elasticbeanstalk",
+								"com"
+							],
+							"path": [
+								"driver",
+								"b5c84311-539b-42c7-8d1f-39fa1327aa28"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create new driver",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"André\",\r\n\t\"cpf\": \"12345678909\",\r\n\t\"age\": \"25\",\r\n\t\"sex\": \"male\",\r\n\t\"address\": \"Um st 75\",\r\n\t\"phoneNumber\": \"38999999999\",\r\n\t\"email\": \"email@email.com\",\r\n\t\"birthDate\": \"03/08/1999\",\r\n    \"licenseNumber\": \"123456\",\r\n    \"vehiclePlate\": \"ABC1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://arkmeds-challenge-env.eba-yrfyrp28.sa-east-1.elasticbeanstalk.com/driver",
+							"protocol": "http",
+							"host": [
+								"arkmeds-challenge-env",
+								"eba-yrfyrp28",
+								"sa-east-1",
+								"elasticbeanstalk",
+								"com"
+							],
+							"path": [
+								"driver"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update driver",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"André Lopes\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://arkmeds-challenge-env.eba-yrfyrp28.sa-east-1.elasticbeanstalk.com/driver/b66b7450-88d4-4d06-93ee-ca373fb92647",
+							"protocol": "http",
+							"host": [
+								"arkmeds-challenge-env",
+								"eba-yrfyrp28",
+								"sa-east-1",
+								"elasticbeanstalk",
+								"com"
+							],
+							"path": [
+								"driver",
+								"b66b7450-88d4-4d06-93ee-ca373fb92647"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete driver",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://arkmeds-challenge-env.eba-yrfyrp28.sa-east-1.elasticbeanstalk.com/driver/auuashdkasdu",
+							"protocol": "http",
+							"host": [
+								"arkmeds-challenge-env",
+								"eba-yrfyrp28",
+								"sa-east-1",
+								"elasticbeanstalk",
+								"com"
+							],
+							"path": [
+								"driver",
+								"auuashdkasdu"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Fare",
+			"item": [
+				{
+					"name": "Generate fare",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"from\": {\r\n        \"latitude\": 123,\r\n        \"longitude\": 456\r\n    },\r\n    \"to\": {\r\n        \"latitude\": 789,\r\n        \"longitude\": 123\r\n    },\r\n    \"dateTime\": \"2024-08-27T15:08:30-03:00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://arkmeds-challenge-env.eba-yrfyrp28.sa-east-1.elasticbeanstalk.com/fare",
+							"protocol": "http",
+							"host": [
+								"arkmeds-challenge-env",
+								"eba-yrfyrp28",
+								"sa-east-1",
+								"elasticbeanstalk",
+								"com"
+							],
+							"path": [
+								"fare"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Race",
+			"item": [
+				{
+					"name": "Accept race",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": \"1234\",\r\n    \"fare\": \"57.44\",\r\n    \"distance\": \"200\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://arkmeds-challenge-env.eba-yrfyrp28.sa-east-1.elasticbeanstalk.com/race",
+							"protocol": "http",
+							"host": [
+								"arkmeds-challenge-env",
+								"eba-yrfyrp28",
+								"sa-east-1",
+								"elasticbeanstalk",
+								"com"
+							],
+							"path": [
+								"race"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
