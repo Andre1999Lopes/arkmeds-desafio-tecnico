@@ -2,13 +2,18 @@ import express from 'express';
 import fs from 'fs';
 import path from 'path';
 import request from 'supertest';
+import { v4 } from 'uuid';
 import { AcceptRaceRequestDTO } from '../application/dtos/AcceptRaceRequestDTO';
 import { MessageDTO } from '../application/dtos/MessageDTO';
+import { ValidationService } from '../application/services/ValidationService';
 import { AcceptRaceUseCase } from '../domain/useCases/Race/AcceptRaceUseCase';
 import { ENV } from '../infra/config';
 import { raceRouter } from '../infra/http/routes/race.routes';
 import { KafkaConsumer } from '../infra/queue/consumer/KafkaConsumer';
 import { KafkaProducer } from '../infra/queue/producer/KafkaProducer';
+
+const passengerId = v4();
+const driverId = v4();
 
 jest.mock('kafkajs', () => {
 	const actualKafkaJS = jest.requireActual('kafkajs');
@@ -26,8 +31,8 @@ jest.mock('kafkajs', () => {
 					eachMessage({
 						message: {
 							value: JSON.stringify({
-								passengerId: '123',
-								driverId: '456',
+								passengerId,
+								driverId,
 								distance: 50,
 								fare: 50,
 								date: '2024-08-27T12:00:00Z'
@@ -56,10 +61,10 @@ describe('Kafka Producer', () => {
 
 	it('should send a message', async () => {
 		const message = new MessageDTO({
-			passengerId: '123',
-			driverId: '456',
+			passengerId,
+			driverId,
 			fare: 50,
-			date: new Date().toISOString(),
+			date: '2024-08-27T12:00:00Z',
 			distance: 50
 		});
 
@@ -79,13 +84,16 @@ describe('AcceptRaceUseCase', () => {
 	beforeEach(() => {
 		const producer = KafkaProducer.getInstance() as jest.Mocked<KafkaProducer>;
 		producerSendMessageMock = jest.spyOn(producer, 'sendMessage');
-		acceptRaceUseCase = AcceptRaceUseCase.getInstance(producer);
+		acceptRaceUseCase = AcceptRaceUseCase.getInstance(
+			producer,
+			ValidationService.getInstance()
+		);
 	});
 
 	it('should send a message with correct data', async () => {
 		const raceData = new AcceptRaceRequestDTO({
-			passengerId: '123',
-			driverId: '456',
+			passengerId,
+			driverId,
 			fare: '50',
 			distance: '50'
 		});
@@ -95,7 +103,7 @@ describe('AcceptRaceUseCase', () => {
 			driverId: raceData.driverId,
 			fare: Math.round(parseFloat(raceData.fare) * 100) / 100,
 			distance: Math.round(parseFloat(raceData.distance) * 100) / 100,
-			date: new Date().toISOString()
+			date: expect.any(String)
 		});
 
 		await acceptRaceUseCase.execute(raceData);
@@ -122,16 +130,18 @@ describe('KafkaConsumer', () => {
 		await kafkaConsumer.connect();
 
 		expect(mkdirSyncMock).toHaveBeenCalledWith(
-			path.join(__dirname, '../tmp', '123'),
-			{ recursive: true }
+			path.join(__dirname, '../tmp', passengerId),
+			{
+				recursive: true
+			}
 		);
 
 		expect(appendFileSyncMock).toHaveBeenCalledWith(
-			path.join(__dirname, '../tmp', '123', `2024-08-27.txt`),
+			path.join(__dirname, '../tmp', passengerId, `2024-08-27.txt`),
 			JSON.stringify(
 				{
-					passengerId: '123',
-					driverId: '456',
+					passengerId,
+					driverId,
 					distance: 50,
 					fare: 50,
 					date: '2024-08-27T12:00:00Z'
@@ -153,21 +163,22 @@ describe('RaceController', () => {
 		app.use('/race', raceRouter);
 
 		acceptRaceUseCase = AcceptRaceUseCase.getInstance(
-			KafkaProducer.getInstance()
+			KafkaProducer.getInstance(),
+			ValidationService.getInstance()
 		) as jest.Mocked<AcceptRaceUseCase>;
 	});
 
 	it('should handle race acceptance', async () => {
 		const raceData = new AcceptRaceRequestDTO({
-			passengerId: '123',
-			driverId: '456',
+			passengerId,
+			driverId,
 			fare: '50',
 			distance: '50'
 		});
 		const message = new MessageDTO({
 			...raceData,
 			fare: Math.round(parseFloat(raceData.fare) * 100) / 100,
-			date: new Date().toISOString(),
+			date: '2024-08-27T12:00:00Z',
 			distance: Math.round(parseFloat(raceData.distance) * 100) / 100
 		});
 

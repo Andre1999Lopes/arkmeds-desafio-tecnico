@@ -1,3 +1,4 @@
+import { AcceptRaceRequestDTO } from '../../application/dtos/AcceptRaceRequestDTO';
 import { ValidationError } from '../../domain/errors/ValidationError';
 import { isValidBirthDate } from '../../utils/birthDateValidator';
 import { isValidCpf } from '../../utils/cpfValidator';
@@ -133,6 +134,24 @@ export class ValidationService {
 
 		if (!isValidDateTime(date)) {
 			throw new ValidationError('Invalid date');
+		}
+	}
+
+	validateRace(race: AcceptRaceRequestDTO) {
+		if (!race.driverId || !isValidUuid(race.driverId)) {
+			throw new ValidationError('Invalid Driver ID');
+		}
+
+		if (!race.passengerId || !isValidUuid(race.passengerId)) {
+			throw new ValidationError('Invalid Driver ID');
+		}
+
+		if (!race.distance || isNaN(parseFloat(race.distance))) {
+			throw new ValidationError('Invalid distance');
+		}
+
+		if (!race.fare || isNaN(parseFloat(race.fare))) {
+			throw new ValidationError('Invalid fare');
 		}
 	}
 
