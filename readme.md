@@ -2,7 +2,7 @@
 
 Project developed with Node.JS and TypeScript using a postgres database on Amazon RDS and Apache Kafka.
 
-The API is deployed on an EC2 instance managed by Elastic Beanstalk.
+The API is deployed on Heroku.
 
 For it to work locally, it's necessary to configure a Kafka broker, a Kafka topic, and a postgres database.
 
