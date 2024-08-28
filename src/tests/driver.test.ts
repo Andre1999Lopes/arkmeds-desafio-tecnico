@@ -29,6 +29,8 @@ describe('Driver Routes', () => {
 		it('should create a new driver', async () => {
 			const response = await request(app).post('/driver').send(driver);
 
+			console.log(JSON.stringify(response.body), null, 2);
+
 			expect(response.status).toBe(201);
 			expect(response.body).toHaveProperty(
 				'message',
@@ -56,6 +58,8 @@ describe('Driver Routes', () => {
 					cpf: '13697126938'
 				});
 
+			console.log(JSON.stringify(response.body), null, 2);
+
 			expect(response.status).toBe(409);
 			expect(response.body).toHaveProperty(
 				'message',
@@ -67,6 +71,8 @@ describe('Driver Routes', () => {
 	describe('GET /driver', () => {
 		it('should retrieve all drivers', async () => {
 			const response = await request(app).get('/driver');
+
+			console.log(JSON.stringify(response.body), null, 2);
 
 			expect(response.status).toBe(200);
 			expect(response.body).toHaveProperty(
