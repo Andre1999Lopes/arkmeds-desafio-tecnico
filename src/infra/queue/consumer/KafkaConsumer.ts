@@ -45,7 +45,7 @@ export class KafkaConsumer {
 				const receiptPath = path.join(
 					__dirname,
 					'../../../tmp',
-					raceData.userId
+					raceData.passengerId
 				);
 
 				fs.mkdirSync(receiptPath, { recursive: true });

@@ -1,5 +1,3 @@
-import { Ride } from './Ride';
-
 export class Passenger {
 	public id: string;
 	public name: string;
@@ -12,7 +10,6 @@ export class Passenger {
 	public birthDate: Date;
 	public createdAt: Date;
 	public updatedAt: Date;
-	public rides: Ride[];
 
 	constructor(data: {
 		id: string;
@@ -26,7 +23,6 @@ export class Passenger {
 		birthDate: Date;
 		createdAt: Date;
 		updatedAt: Date;
-		rides: Ride[];
 	}) {
 		this.id = data.id;
 		this.name = data.name;
@@ -39,6 +35,5 @@ export class Passenger {
 		this.birthDate = data.birthDate;
 		this.createdAt = data.createdAt;
 		this.updatedAt = data.updatedAt;
-		this.rides = data.rides;
 	}
 }

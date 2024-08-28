@@ -22,9 +22,6 @@ export class PassengerRepositoryImpl implements PassengerRepository {
 				...passenger,
 				age: parseInt(passenger.age),
 				birthDate: new Date(passenger.birthDate)
-			},
-			include: {
-				rides: true
 			}
 		});
 
@@ -33,8 +30,7 @@ export class PassengerRepositoryImpl implements PassengerRepository {
 
 	async findById(passengerId: string): Promise<Passenger | null> {
 		const passenger = await prisma.passenger.findUnique({
-			where: { id: passengerId },
-			include: { rides: true }
+			where: { id: passengerId }
 		});
 
 		if (!passenger) {
@@ -46,8 +42,7 @@ export class PassengerRepositoryImpl implements PassengerRepository {
 
 	async findByCpf(passengerCpf: string): Promise<Passenger | null> {
 		const passenger = await prisma.passenger.findUnique({
-			where: { cpf: passengerCpf },
-			include: { rides: true }
+			where: { cpf: passengerCpf }
 		});
 
 		if (!passenger) {
@@ -59,8 +54,7 @@ export class PassengerRepositoryImpl implements PassengerRepository {
 
 	async findByEmail(passengerEmail: string): Promise<Passenger | null> {
 		const passenger = await prisma.passenger.findUnique({
-			where: { email: passengerEmail },
-			include: { rides: true }
+			where: { email: passengerEmail }
 		});
 
 		if (!passenger) {
@@ -71,9 +65,7 @@ export class PassengerRepositoryImpl implements PassengerRepository {
 	}
 
 	async findAll(): Promise<Passenger[]> {
-		const passengers = await prisma.passenger.findMany({
-			include: { rides: true }
-		});
+		const passengers = await prisma.passenger.findMany({});
 
 		return passengers.map((passenger) => new Passenger({ ...passenger }));
 	}
@@ -87,9 +79,6 @@ export class PassengerRepositoryImpl implements PassengerRepository {
 				birthDate: passenger.birthDate
 					? new Date(passenger.birthDate)
 					: undefined
-			},
-			include: {
-				rides: true
 			}
 		});
 

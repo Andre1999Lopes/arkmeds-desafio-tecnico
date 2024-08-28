@@ -8,6 +8,7 @@ CREATE TABLE "Passenger" (
     "address" TEXT NOT NULL,
     "phoneNumber" TEXT NOT NULL,
     "email" TEXT NOT NULL,
+    "birthDate" TIMESTAMP(3) NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -26,6 +27,7 @@ CREATE TABLE "Driver" (
     "email" TEXT NOT NULL,
     "licenseNumber" TEXT NOT NULL,
     "vehiclePlate" TEXT NOT NULL,
+    "birthDate" TIMESTAMP(3) NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -38,6 +40,7 @@ CREATE TABLE "Ride" (
     "passengerId" UUID NOT NULL,
     "driverId" UUID NOT NULL,
     "fare" DOUBLE PRECISION NOT NULL,
+    "distance" DOUBLE PRECISION NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 

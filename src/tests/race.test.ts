@@ -26,7 +26,9 @@ jest.mock('kafkajs', () => {
 					eachMessage({
 						message: {
 							value: JSON.stringify({
-								userId: '123',
+								passengerId: '123',
+								driverId: '456',
+								distance: 50,
 								fare: 50,
 								date: '2024-08-27T12:00:00Z'
 							})
@@ -54,7 +56,8 @@ describe('Kafka Producer', () => {
 
 	it('should send a message', async () => {
 		const message = new MessageDTO({
-			userId: '123',
+			passengerId: '123',
+			driverId: '456',
 			fare: 50,
 			date: new Date().toISOString(),
 			distance: 50
@@ -81,15 +84,17 @@ describe('AcceptRaceUseCase', () => {
 
 	it('should send a message with correct data', async () => {
 		const raceData = new AcceptRaceRequestDTO({
-			userId: '123',
+			passengerId: '123',
+			driverId: '456',
 			fare: '50',
-			distance: 50
+			distance: '50'
 		});
 
 		const message = new MessageDTO({
-			userId: raceData.userId,
-			fare: parseInt(raceData.fare),
-			distance: raceData.distance,
+			passengerId: raceData.passengerId,
+			driverId: raceData.driverId,
+			fare: Math.round(parseFloat(raceData.fare) * 100) / 100,
+			distance: Math.round(parseFloat(raceData.distance) * 100) / 100,
 			date: new Date().toISOString()
 		});
 
@@ -125,7 +130,9 @@ describe('KafkaConsumer', () => {
 			path.join(__dirname, '../tmp', '123', `2024-08-27.txt`),
 			JSON.stringify(
 				{
-					userId: '123',
+					passengerId: '123',
+					driverId: '456',
+					distance: 50,
 					fare: 50,
 					date: '2024-08-27T12:00:00Z'
 				},
@@ -152,14 +159,16 @@ describe('RaceController', () => {
 
 	it('should handle race acceptance', async () => {
 		const raceData = new AcceptRaceRequestDTO({
-			userId: '123',
+			passengerId: '123',
+			driverId: '456',
 			fare: '50',
-			distance: 50
+			distance: '50'
 		});
 		const message = new MessageDTO({
 			...raceData,
-			fare: parseFloat(raceData.fare),
-			date: new Date().toISOString()
+			fare: Math.round(parseFloat(raceData.fare) * 100) / 100,
+			date: new Date().toISOString(),
+			distance: Math.round(parseFloat(raceData.distance) * 100) / 100
 		});
 
 		jest.spyOn(acceptRaceUseCase, 'execute').mockResolvedValueOnce(undefined);

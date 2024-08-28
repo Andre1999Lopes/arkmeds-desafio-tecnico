@@ -12,7 +12,7 @@ const driver = new DriverDTO({
 	address: '123 Main St',
 	email: 'johndoe@example.com',
 	phoneNumber: '1234567890',
-	birthDate: '1993-01-01',
+	birthDate: '03/08/1999',
 	licenseNumber: 'AB123456',
 	vehiclePlate: 'ABC1234'
 });

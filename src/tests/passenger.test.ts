@@ -12,7 +12,7 @@ const passenger = new PassengerDTO({
 	address: '123 Main St',
 	email: 'johndoe@example.com',
 	phoneNumber: '1234567890',
-	birthDate: '1993-01-01'
+	birthDate: '03/08/1999'
 });
 
 describe('Passenger Routes', () => {

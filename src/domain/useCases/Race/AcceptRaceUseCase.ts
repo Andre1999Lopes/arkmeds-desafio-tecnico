@@ -22,7 +22,8 @@ export class AcceptRaceUseCase {
 	async execute(raceData: AcceptRaceRequestDTO) {
 		const message = new MessageDTO({
 			...raceData,
-			fare: parseFloat(raceData.fare),
+			distance: Math.round(parseFloat(raceData.distance) * 100) / 100,
+			fare: Math.round(parseFloat(raceData.fare) * 100) / 100,
 			date: new Date().toISOString()
 		});
 

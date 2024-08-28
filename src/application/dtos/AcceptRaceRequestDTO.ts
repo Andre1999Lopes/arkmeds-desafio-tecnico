@@ -1,10 +1,17 @@
 export class AcceptRaceRequestDTO {
-	public userId: string;
+	public passengerId: string;
+	public driverId: string;
 	public fare: string;
-	public distance: number;
+	public distance: string;
 
-	constructor(data: { userId: string; distance: number; fare: string }) {
-		this.userId = data.userId;
+	constructor(data: {
+		passengerId: string;
+		driverId: string;
+		distance: string;
+		fare: string;
+	}) {
+		this.passengerId = data.passengerId;
+		this.driverId = data.driverId;
 		this.fare = data.fare;
 		this.distance = data.distance;
 	}

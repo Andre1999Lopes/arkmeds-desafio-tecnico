@@ -22,9 +22,6 @@ export class DriverRepositoryImpl implements DriverRepository {
 				...driver,
 				age: parseInt(driver.age),
 				birthDate: new Date(driver.birthDate)
-			},
-			include: {
-				rides: true
 			}
 		});
 
@@ -33,8 +30,7 @@ export class DriverRepositoryImpl implements DriverRepository {
 
 	async findById(driverId: string): Promise<Driver | null> {
 		const driver = await prisma.driver.findUnique({
-			where: { id: driverId },
-			include: { rides: true }
+			where: { id: driverId }
 		});
 
 		if (!driver) {
@@ -46,8 +42,7 @@ export class DriverRepositoryImpl implements DriverRepository {
 
 	async findByCpf(driverCpf: string): Promise<Driver | null> {
 		const driver = await prisma.driver.findUnique({
-			where: { cpf: driverCpf },
-			include: { rides: true }
+			where: { cpf: driverCpf }
 		});
 
 		if (!driver) {
@@ -59,8 +54,7 @@ export class DriverRepositoryImpl implements DriverRepository {
 
 	async findByLicenseNumber(licenseNumber: string): Promise<Driver | null> {
 		const driver = await prisma.driver.findUnique({
-			where: { licenseNumber },
-			include: { rides: true }
+			where: { licenseNumber }
 		});
 
 		if (!driver) {
@@ -72,8 +66,7 @@ export class DriverRepositoryImpl implements DriverRepository {
 
 	async findByEmail(driverEmail: string): Promise<Driver | null> {
 		const driver = await prisma.driver.findUnique({
-			where: { email: driverEmail },
-			include: { rides: true }
+			where: { email: driverEmail }
 		});
 
 		if (!driver) {
@@ -84,9 +77,7 @@ export class DriverRepositoryImpl implements DriverRepository {
 	}
 
 	async findAll(): Promise<Driver[]> {
-		const drivers = await prisma.driver.findMany({
-			include: { rides: true }
-		});
+		const drivers = await prisma.driver.findMany({});
 
 		return drivers.map((driver) => new Driver({ ...driver }));
 	}
@@ -100,9 +91,6 @@ export class DriverRepositoryImpl implements DriverRepository {
 				birthDate: driverToUpdate.birthDate
 					? new Date(driverToUpdate.birthDate)
 					: undefined
-			},
-			include: {
-				rides: true
 			}
 		});
 
