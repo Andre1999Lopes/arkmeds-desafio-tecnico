@@ -22,6 +22,8 @@ jobs:
 
       - name: Run migrations
         run: npx prisma migrate deploy
+        env:
+          DATABASE_URL: ${{secrets.DATABASE_URL}}
 
       - name: Run tests and check coverage
         run: npm run test
